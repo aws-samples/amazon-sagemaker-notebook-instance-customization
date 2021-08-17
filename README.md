@@ -128,3 +128,11 @@ To change the terminal font size, after installation
 1. open `/home/ec2-user/SageMaker/initsmnb/change-fontsize.sh` in a text editor,
 2. go to the section that customizes the terminal,
 3. then change the fontsize (default is 10) to another value of your choice.
+
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
