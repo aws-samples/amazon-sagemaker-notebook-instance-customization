@@ -67,6 +67,7 @@ set expandtab
 set nowrap
 set foldmethod=indent
 set foldlevel=99
+set smartindent
 
 """ Shortcuts
 map <F3> :set paste!<CR>
