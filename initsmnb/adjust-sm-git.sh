@@ -42,3 +42,8 @@ git config --global alias.lolac "! clear; git lol --all -\$(expr \`tput lines\` 
 
 echo Cache git credential for 3600 seconds
 git config credential.helper 'cache --timeout=3600'
+
+# Needed when notebook instance is not configured with a code repository.
+echo Setup steps for HTTPS connections to AWS CodeCommit repositories
+git config --global credential.helper '!aws codecommit credential-helper $@'
+git config --global credential.UseHttpPath true
