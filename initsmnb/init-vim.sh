@@ -68,6 +68,7 @@ set nowrap
 set foldmethod=indent
 set foldlevel=99
 set smartindent
+filetype plugin indent on
 
 """ Shortcuts
 map <F3> :set paste!<CR>
