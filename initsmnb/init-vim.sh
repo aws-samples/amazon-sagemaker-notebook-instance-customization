@@ -93,4 +93,3 @@ EOF
 fi
 
 apply_vim_setting
-
