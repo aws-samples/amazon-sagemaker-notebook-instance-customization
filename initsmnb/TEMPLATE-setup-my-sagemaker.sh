@@ -34,3 +34,6 @@ ${BIN_DIR}/mount-efs-accesspoint.sh fsid,fsapid,mountpoint
 
 # These require jupyter lab restarted and browser reloaded, to see the changes.
 ${BIN_DIR}/patch-jupyter-config.sh
+
+# Final checks and next steps to see the changes in-effect
+${BIN_DIR}/final-check.sh
