@@ -5,6 +5,8 @@
 ################################################################################
 INITSMNB_DIR=/home/ec2-user/SageMaker/initsmnb
 SRC_PREFIX=https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-notebook-instance-customization/main/initsmnb
+# Uncomment for testing remote install from local source
+#SRC_PREFIX=file:///home/ec2-user/SageMaker/amazon-sagemaker-notebook-instance-customization/initsmnb
 
 declare -a SCRIPTS=(
     TEMPLATE-setup-my-sagemaker.sh
@@ -16,7 +18,14 @@ declare -a SCRIPTS=(
     mount-efs-accesspoint.sh
     patch-bash-config.sh
     patch-jupyter-config.sh
+    final-check.sh
 )
+
+declare -a NESTED_FILES=(
+    .ipython/profile_default/startup/01-osx-jupyterlab-keys.py
+)
+
+CURL_OPTS="--fail-early -fL"
 
 FROM_LOCAL=0
 GIT_USER=''
@@ -81,6 +90,24 @@ efs2str() {
     fi
 }
 
+exit_on_download_error() {
+    cat << EOF
+
+###############################################################################
+# ERROR
+###############################################################################
+# Could not downloading files from:
+#
+# $SRC_PREFIX/
+#
+# Please check and ensure your SageMaker classic notebook instance has the
+# necessary network access to download files from the source repository.
+###############################################################################
+
+EOF
+    exit -1
+}
+
 
 ################################################################################
 # Main
@@ -96,8 +123,15 @@ if [[ $FROM_LOCAL == 0 ]]; then
     cd $INITSMNB_DIR
     echo "Downloading scripts from ${SRC_PREFIX}/"
     echo
-    curl -fsLO $SRC_PREFIX/{$(echo "${SCRIPTS[@]}" | tr ' ' ',')}
+    curl $CURL_OPTS -O $SRC_PREFIX/{$(echo "${SCRIPTS[@]}" | tr ' ' ',')}
+    [[ $? == 22 ]] && exit_on_download_error
     chmod ugo+x ${SCRIPTS[@]}
+
+    # Nested scripts need 1 curl/file
+    for i in "${NESTED_FILES[@]}"; do
+        curl $CURL_OPTS --create-dirs -o $i $SRC_PREFIX/$i
+        [[ $? == 22 ]] && exit_on_download_error
+    done
 else
     BIN_DIR=$(dirname "$(readlink -f ${BASH_SOURCE[0]})")
     cd $INITSMNB_DIR
