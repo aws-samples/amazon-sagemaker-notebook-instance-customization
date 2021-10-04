@@ -1,13 +1,43 @@
-# Sample Scripts to Customize SageMaker Notebook Instance
+# 1. Sample Scripts to Customize SageMaker Notebook Instance
 
-Scripts to re-run common tweaks on a fresh (i.e., newly created or rebooted)
-SageMaker notebook instance, to make the notebook instance a little bit more
-ergonomic for prolonged usage.
+Table of contents:
+
+- [1. Sample Scripts to Customize SageMaker Notebook Instance](#1-sample-scripts-to-customize-sagemaker-notebook-instance)
+  - [1.1. Overview](#11-overview)
+  - [1.2. Non-exhaustive list of customizations](#12-non-exhaustive-list-of-customizations)
+  - [1.3. Installation](#13-installation)
+    - [1.3.1. Installation from github](#131-installation-from-github)
+    - [1.3.2. Installation from local source](#132-installation-from-local-source)
+  - [1.4. Usage](#14-usage)
+  - [1.5. Appendix](#15-appendix)
+    - [1.5.1. Restart JupyterLab](#151-restart-jupyterlab)
+    - [1.5.2. Change terminal font size](#152-change-terminal-font-size)
+  - [1.6. Related Projects](#16-related-projects)
+  - [1.7. Security](#17-security)
+  - [1.8. License](#18-license)
+
+## 1.1. Overview
+
+This repo contains scripts to re-run common tweaks on a fresh (i.e., newly
+created or rebooted) SageMaker **classic** notebook instance, to make the
+notebook instance a little bit more ergonomic for prolonged usage.
 
 Once [installed](#installation-from-github), everytime you access a newly
-restarted notebook instance, open a terminal, run
-`~/SageMaker/initsmnb/setup-my-sagemaker.sh`, then
-[restart the Jupyter process](#appendix-restart-jupyterlab).
+restarted notebook instance, you just need to perform these three short, simple
+steps to apply the customizations:
+
+1. open a terminal,
+2. run a one-liner command line `~/SageMaker/initsmnb/setup-my-sagemaker.sh`,
+3. [restart the Jupyter process](#appendix-restart-jupyterlab).
+
+By supporting a simple one-liner command line, we hope that you can quickly test
+this repo as a *data scientist* (with your notebook instance as all that you
+need), rather than as an *infrastructure engineer* which typically works with
+more sophisticated automation tools or services.
+
+We hope that you find this repo useful to adopt into your daily work habits.
+
+## 1.2. Non-exhaustive list of customizations
 
 Please note that tweaks marked with **\[Need sudo\]** can only be in-effect when
 your notebook instance enables
@@ -53,13 +83,22 @@ your notebook instance enables
     Otherwise, `ctrl-w` is used by most browsers on Linux (and Windows?) to
     close a browser tab, which renders windows navigation in `vim` unusable.
 
-  -_ Other opinionated changes; see `init-vim.sh`.
+  - Other opinionated changes; see `init-vim.sh`.
 
 - **\[Need sudo\]** Optionally mount one or more EFS.
 
-## Installation from github
+## 1.3. Installation
 
 This step needs to be done **once** on a newly *created* notebook instance.
+
+You can choose to have the installation process automatically download the
+necessary files from this repo, provided that your SageMaker classic notebook
+instance has the necessary network access to this repo.
+
+Another choice is to bootstrap this repo into your SageMaker classic notebook
+instance, then invoke the install script in its local mode.
+
+### 1.3.1. Installation from github
 
 Go to the Jupyter Lab on your SageMaker notebook instance. Open a terminal,
 then run this command:
@@ -92,9 +131,9 @@ mounted as `/home/ec2-user/mnt/my_efs_01/`, while the second one `fs-456` will
 be mounted as `/home/ec2-user/mnt/my_efs_02/`.
 
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
-Your next step is to jump to section Usage.
+Your next step is to jump to section [Usage](#14-usage).
 
-## Installation from local source
+### 1.3.2. Installation from local source
 
 On your SageMaker notebook instance, open a terminal and run these commands:
 
@@ -106,9 +145,9 @@ cd amazon-sagemaker-notebook-instance-customization/initsmnb
 ```
 
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
-Your next step is to jump to section Usage.
+Your next step is to jump to section [Usage](#14-usage).
 
-## Usage
+## 1.4. Usage
 
 Once installed, you should see file `/home/ec2-user/SageMaker/initsmnb/setup-my-sagemaker.sh`.
 
@@ -121,7 +160,9 @@ Due to how SageMaker notebook works, please re-run `setup-my-sagemaker.sh` on a
 newly *started* or *restarted* instance. You may even consider to automate this
 step using SageMaker lifecycle config.
 
-## Appendix: Restart JupyterLab
+## 1.5. Appendix
+
+### 1.5.1. Restart JupyterLab
 
 On the Jupyter Lab's terminal, run this command:
 
@@ -131,7 +172,7 @@ sudo initctl restart jupyter-server --no-wait
 
 Then, reload your browser tab.
 
-## Appendix: different terminal font size
+### 1.5.2. Change terminal font size
 
 To change the terminal font size, after installation
 
@@ -139,10 +180,34 @@ To change the terminal font size, after installation
 2. go to the section that customizes the terminal,
 3. then change the fontsize (default is 10) to another value of your choice.
 
-## Security
+## 1.6. Related Projects
+
+Once you've customized your development environment on your SageMaker classic
+notebook instance, we invite you to explore related samples.
+
+1. [aws-samples/python-data-science-template](https://github.com/aws-samples/python-data-science-template/)
+   shows a one-liner command line that instantenously auto-generate a modular,
+   Python-based data science project structure.
+
+2. [ML Max](https://github.com/awslabs/mlmax/) is a set of example templates to
+   accelerate the delivery of custom ML solutions to production so you can get
+   started quickly without having to make too many design choices. At present,
+   it covers four pillars: training pipeline, inference pipeline, development
+   environment, and data management/ETL.
+
+3. Learn about a different mechanism to create custom Jupyter kernel on a SageMaker
+   classic notebook instance, described in
+   [aws-samples/aws-sagemaker-custom-jupyter-kernel](https://github.com/aws-samples/aws-sagemaker-custom-jupyter-kernel/).
+
+4. *Wearing an "infrastructure engineer" hat* -- when you're ready or allowed to
+   implement the customizations as a lifecycle configuration for your SageMaker
+   notebook instance, feel free to further explore these
+   [examples](https://github.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/).
+
+## 1.7. Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
-## License
+## 1.8. License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
