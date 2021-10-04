@@ -22,9 +22,9 @@ This repo contains scripts to re-run common tweaks on a fresh (i.e., newly
 created or rebooted) SageMaker **classic** notebook instance, to make the
 notebook instance a little bit more ergonomic for prolonged usage.
 
-Once [installed](#installation-from-github), everytime you access a newly
-restarted notebook instance, you just need to perform these three short, simple
-steps to apply the customizations:
+Once installed, everytime you access a newly restarted notebook instance, you
+just need to perform these three short, simple steps to see and experience the
+customizations:
 
 1. open a terminal,
 2. run a one-liner command line `~/SageMaker/initsmnb/setup-my-sagemaker.sh`,
