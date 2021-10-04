@@ -40,4 +40,4 @@ cat << EOF >> /home/ec2-user/.bashrc
 alias ll='ls -alF --color=auto'
 EOF
 
-echo "On a new SageMaker terminal, which uses 'sh' by default, type 'bash -l' (without the quotes)"
+#echo "On a new SageMaker terminal, which uses 'sh' by default, type 'bash -l' (without the quotes)"

@@ -30,7 +30,7 @@ set_git_user "$@"
 echo 'Set editor to /usr/bin/vim (for DL AMI)'
 git config --global core.editor /usr/bin/vim
 
-echo 'Set default branch to main'
+echo 'Set default branch to main (effective only with git>=2.28)'
 git config --global init.defaultBranch main
 
 echo Adjusting log aliases...
@@ -39,9 +39,6 @@ git config --global alias.lol "log --graph --format=format:'%C(bold blue)%h%C(re
 git config --global alias.lola "! git lol --all"
 git config --global alias.lolc "! clear; git lol -\$(expr \`tput lines\` '*' 2 / 3)"
 git config --global alias.lolac "! clear; git lol --all -\$(expr \`tput lines\` '*' 2 / 3)"
-
-echo Cache git credential for 3600 seconds
-git config credential.helper 'cache --timeout=3600'
 
 # Needed when notebook instance is not configured with a code repository.
 echo Setup steps for HTTPS connections to AWS CodeCommit repositories

@@ -6,7 +6,7 @@ VIMRC=${VIM_SM_ROOT}/.vimrc
 
 apply_vim_setting() {
     # vimrc
-    rm /home/ec2-user/.vimrc
+    [[ -f /home/ec2-user/.vimrc ]] && rm /home/ec2-user/.vimrc
     ln -s ${VIMRC} /home/ec2-user/.vimrc
 
     echo "Vim initialized"
@@ -93,4 +93,3 @@ EOF
 fi
 
 apply_vim_setting
-
