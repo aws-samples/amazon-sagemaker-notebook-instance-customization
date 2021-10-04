@@ -96,13 +96,13 @@ Your next step is to jump to section Usage.
 
 ## Installation from local source
 
-On your SageMaker notebook instance:
+On your SageMaker notebook instance, open a terminal and run these commands:
 
 ```bash
 cd ~/SageMaker
 git clone https://github.com/aws-samples/amazon-sagemaker-notebook-instance-customization.git
 cd amazon-sagemaker-notebook-instance-customization/initsmnb
-./install-initsmnb-sh --from-local ...
+./install-initsmnb.sh --from-local --git-user 'First Last' --git-email 'ab@email.abc'
 ```
 
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
@@ -112,9 +112,10 @@ Your next step is to jump to section Usage.
 
 Once installed, you should see file `/home/ec2-user/SageMaker/initsmnb/setup-my-sagemaker.sh`.
 
-Run this file to apply the changes to the current session, and follow the
-instruction to restart the Jupyter server (and after that, do remember to reload
-your browser tab).
+To apply the customizations to the current session, open a terminal and run
+`~/SageMaker/initsmnb/setup-my-sagemaker.sh`. Once the script finishes, please
+follow the on-screen instruction to restart the Jupyter server (and after that,
+do remember to reload your browser tab).
 
 Due to how SageMaker notebook works, please re-run `setup-my-sagemaker.sh` on a
 newly *started* or *restarted* instance. You may even consider to automate this
