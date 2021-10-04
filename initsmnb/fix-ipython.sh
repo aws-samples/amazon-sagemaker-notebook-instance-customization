@@ -22,6 +22,6 @@ IPYTHON_STARTUP_CFG=${IPYTHON_STARTUP_DIR}/01-osx-jupyterlab-keys.py
     mkdir -p /home/ec2-user/SageMaker/${IPYTHON_STARTUP_DIR}
     cp -a $IPYTHON_STARTUP_CFG /home/ec2-user/SageMaker/${IPYTHON_STARTUP_CFG}
 mkdir -p /home/ec2-user/${IPYTHON_STARTUP_DIR}
-ln -s \
+[[ ! -f /home/ec2-user/${IPYTHON_STARTUP_CFG} ]] && ln -s \
     /home/ec2-user/SageMaker/${IPYTHON_STARTUP_CFG} \
     /home/ec2-user/${IPYTHON_STARTUP_CFG}
