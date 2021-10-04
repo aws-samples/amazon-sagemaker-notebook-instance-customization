@@ -30,7 +30,7 @@ set_git_user "$@"
 echo 'Set editor to /usr/bin/vim (for DL AMI)'
 git config --global core.editor /usr/bin/vim
 
-echo 'Set default branch to main'
+echo 'Set default branch to main (effective only with git>=2.28)'
 git config --global init.defaultBranch main
 
 echo Adjusting log aliases...
