@@ -186,20 +186,26 @@ Once you've customized your development environment on your SageMaker classic
 notebook instance, we invite you to explore related samples.
 
 1. [aws-samples/python-data-science-template](https://github.com/aws-samples/python-data-science-template/)
-   shows a one-liner command line that instantenously auto-generate a modular,
-   Python-based data science project structure.
+   shows a one-liner command line that instantenously auto-generate a modular
+   structure for your new Python-based data science project.
 
-2. [ML Max](https://github.com/awslabs/mlmax/) is a set of example templates to
+2. [aws-samples/amazon-sagemaker-entrypoint-utilities](https://github.com/aws-samples/amazon-sagemaker-entrypoint-utilities)
+   is a sample library to help you quickly write a SageMaker **meta**-entrypoint
+   script for training. This approach aims to reduce the amount of boilerplate
+   codes you need to write for model training, such as argument parsings and
+   logger configurations, which are repetitive and tedious.
+
+3. [ML Max](https://github.com/awslabs/mlmax/) is a set of example templates to
    accelerate the delivery of custom ML solutions to production so you can get
    started quickly without having to make too many design choices. At present,
    it covers four pillars: training pipeline, inference pipeline, development
    environment, and data management/ETL.
 
-3. Learn about a different mechanism to create custom Jupyter kernel on a SageMaker
+4. Learn about a different mechanism to create custom Jupyter kernel on a SageMaker
    classic notebook instance, described in
    [aws-samples/aws-sagemaker-custom-jupyter-kernel](https://github.com/aws-samples/aws-sagemaker-custom-jupyter-kernel/).
 
-4. *Wearing an "infrastructure engineer" hat* -- when you're ready or allowed to
+5. *Wearing an "infrastructure engineer" hat* -- when you're ready or allowed to
    implement the customizations as a lifecycle configuration for your SageMaker
    notebook instance, feel free to further explore these
    [examples](https://github.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/).
