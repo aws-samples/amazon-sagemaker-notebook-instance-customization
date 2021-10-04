@@ -28,7 +28,7 @@ customizations:
 
 1. open a terminal,
 2. run a one-liner command line `~/SageMaker/initsmnb/setup-my-sagemaker.sh`,
-3. [restart the Jupyter process](#appendix-restart-jupyterlab).
+3. [restart the Jupyter process](#151-restart-jupyterlab).
 
 By supporting a simple one-liner command line, we hope that you can quickly test
 this repo as a *data scientist* (with your notebook instance as all that you
@@ -209,6 +209,10 @@ notebook instance, we invite you to explore related samples.
    implement the customizations as a lifecycle configuration for your SageMaker
    notebook instance, feel free to further explore these
    [examples](https://github.com/aws-samples/amazon-sagemaker-notebook-instance-lifecycle-config-samples/).
+
+6. [Data science on Amazon EC2 with vim, tmux and zsh](https://github.com/aws-samples/ec2-data-science-vim-tmux-zsh/)
+   hosts a simple template to set up basic Vim, Tmux, Zsh for the Deep Learning
+   AMI Amazon Linux 2 for data scientists.
 
 ## 1.7. Security
 
