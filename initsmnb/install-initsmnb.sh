@@ -94,8 +94,7 @@ mkdir -p $INITSMNB_DIR
 
 if [[ $FROM_LOCAL == 0 ]]; then
     cd $INITSMNB_DIR
-    echo "Downloading scripts from https://github.com/aws-samples/amazon-sagemaker-notebook-instance-customization/tree/main/initsmnb/"
-    echo "=> ${SRC_PREFIX}/"
+    echo "Downloading scripts from ${SRC_PREFIX}/"
     echo
     curl -fsLO $SRC_PREFIX/{$(echo "${SCRIPTS[@]}" | tr ' ' ',')}
     chmod ugo+x ${SCRIPTS[@]}
@@ -103,8 +102,8 @@ else
     BIN_DIR=$(dirname "$(readlink -f ${BASH_SOURCE[0]})")
     cd $INITSMNB_DIR
     echo "Copying scripts from $BIN_DIR"
-    echo "=> ${SRC_PREFIX}/"
     cp -a ${BIN_DIR}/* .
+    cp -a ${BIN_DIR}/.ipython .
     chmod ugo+x *.sh
 fi
 
@@ -131,15 +130,19 @@ chmod ugo+x setup-my-sagemaker.sh
 
 EPILOGUE=$(cat << EOF
 
-###########################################################
-# Installation completed.                                 #
-#                                                         #
-# To change this session, run:                            #
-#                                                         #
-# ${INITSMNB_DIR}/setup-my-sagemaker.sh #
-#                                                         #
-# On notebook restart, also run that same command.        #
-###########################################################
+###############################################################
+# Installation completed.                                     #
+#                                                             #
+# To change this session, run:                                #
+#                                                             #
+#     ${INITSMNB_DIR}/setup-my-sagemaker.sh #
+#                                                             #
+# or the shorter form:                                        #
+#                                                             #
+#     ~/SageMaker/initsmnb/setup-my-sagemaker.sh              #
+#                                                             #
+# On notebook restart, also run that same command.            #
+###############################################################
 EOF
 )
 echo -e "${EPILOGUE}\n"
