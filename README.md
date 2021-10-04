@@ -14,43 +14,46 @@ your notebook instance enables
 [root access for notebook users](https://aws.amazon.com/blogs/machine-learning/control-root-access-to-amazon-sagemaker-notebook-instances/).
 
 - Jupyter Lab:
-  * Reduce font size on Jupyter Lab
-  * **\[Need sudo\]** Terminal defaults to `bash` shell, dark theme, and smaller font.
-  * **\[Need sudo\]** Jupyter Lab to auto-scan `/home/ec2-user/SageMaker/envs/` for custom conda
-    environments. Note that after you create a new custom conda environment on
-    `/home/ec2-user/SageMaker/envs/`, you may need to
-    [restart JupyterLab](#appendix-restart-jupyterlab) before you can see the
+  - Reduce font size on Jupyter Lab
+  - **\[Need sudo\]** Terminal defaults to `bash` shell, dark theme, and smaller font.
+  - **\[Need sudo\]** In addition to SageMaker's built-in conda environments, Jupyter Lab to also
+    auto-scan `/home/ec2-user/SageMaker/envs/` for custom conda environments.
+
+    This allows for a "persistent" conda environment under `/home/ec2-user/SageMaker/envs` that
+    survives instance reboot.
+
+    Note that after you create a new custom conda environment, e.g.,
+    `conda create --prefix /home/ec2-user/SageMaker/envs/MY_CUSTOM_ENV_NAME python=3.9 ipykernel`
+    you may need to [restart JupyterLab](#appendix-restart-jupyterlab) before you can see the
     environment listed as one of the kernels.
 
-    This allows for a "persistent" conda environment that survives instance reboot.
-
 - Git:
-  * Optionally change committer's name and email, which defaults to `ec2-user`
-  * git aliases: `git lol`, `git lola`, `git lolc`, and `git lolac`
-  * New repo (i.e., `git init`) defaults to branch `main`
-  * **\[Need sudo\]** `nbdime` for notebook-friendly diffs
+  - Optionally change committer's name and email, which defaults to `ec2-user`
+  - git aliases: `git lol`, `git lola`, `git lolc`, and `git lolac`
+  - New repo (i.e., `git init`) defaults to branch `main`
+  - **\[Need sudo\]** `nbdime` for notebook-friendly diffs
 
 - Terminal:
-  * `bash` shortcuts: `alt-.`, `alt-b`, `alt-d`, and `alt-f` work even when
+  - `bash` shortcuts: `alt-.`, `alt-b`, `alt-d`, and `alt-f` work even when
     connecting from OSX.
-  * **\[Need sudo\]** Install command lines: `htop`, `tree`, `dos2unix`,
+  - **\[Need sudo\]** Install command lines: `htop`, `tree`, `dos2unix`,
     `dstat`, `tig`, `ranger` (the CLI file explorer).
-    + `ranger` is configured to use relative line numbers
+    - `ranger` is configured to use relative line numbers
 
 - ipython run from Jupyter Lab's terminal:
-  * shortcuts: `alt-.`, `alt-b`, `alt-d`, and `alt-f` work even when connecting
+  - shortcuts: `alt-.`, `alt-b`, `alt-d`, and `alt-f` work even when connecting
     from OSX.
-  * recolor `o.__class__` from dark blue (nearly invisible on the dark theme) to
+  - recolor `o.__class__` from dark blue (nearly invisible on the dark theme) to
     a more sane color.
 
 - Some customizations on `vim`:
-  * Notably, change window navigation shortcuts from `ctrl-w-{h,j,k,l}` to
+  - Notably, change window navigation shortcuts from `ctrl-w-{h,j,k,l}` to
     `ctrl-{h,j,k,l}`.
 
     Otherwise, `ctrl-w` is used by most browsers on Linux (and Windows?) to
     close a browser tab, which renders windows navigation in `vim` unusable.
 
-  * Other opinionated changes; see `init-vim.sh`.
+  -_ Other opinionated changes; see `init-vim.sh`.
 
 - **\[Need sudo\]** Optionally mount one or more EFS.
 
@@ -88,16 +91,22 @@ will install a script that can mount two EFS, the first one `fs-123` will be
 mounted as `/home/ec2-user/mnt/my_efs_01/`, while the second one `fs-456` will
 be mounted as `/home/ec2-user/mnt/my_efs_02/`.
 
+After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
+Your next step is to jump to section Usage.
+
 ## Installation from local source
 
 On your SageMaker notebook instance:
 
 ```bash
-$ cd ~/SageMaker
-$ git clone https://github.com/aws-samples/amazon-sagemaker-notebook-instance-customization.git
-$ cd amazon-sagemaker-notebook-instance-customization/initsmnb
-$ ./install-initsmnb-sh --from-local ...
+cd ~/SageMaker
+git clone https://github.com/aws-samples/amazon-sagemaker-notebook-instance-customization.git
+cd amazon-sagemaker-notebook-instance-customization/initsmnb
+./install-initsmnb-sh --from-local ...
 ```
+
+After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
+Your next step is to jump to section Usage.
 
 ## Usage
 
