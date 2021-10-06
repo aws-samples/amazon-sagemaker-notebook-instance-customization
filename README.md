@@ -75,7 +75,8 @@ your notebook instance enables
   - `bash` shortcuts: `alt-.`, `alt-b`, `alt-d`, and `alt-f` work even when
     connecting from OSX.
   - **\[Need sudo\]** Install command lines: `htop`, `tree`, `dos2unix`,
-    `dstat`, `tig`, `ranger` (the CLI file explorer).
+    `dstat`, `tig`, `ranger` (the CLI file explorer),
+    [cookiecutter](https://pypi.org/project/cookiecutter/).
     - `ranger` is configured to use relative line numbers
 
 - ipython run from Jupyter Lab's terminal:
@@ -178,7 +179,10 @@ On the Jupyter Lab's terminal, run this command:
 sudo initctl restart jupyter-server --no-wait
 ```
 
-Then, reload your browser tab.
+After issuing the command, your Jupyter interface will probably freeze, which
+is expected.
+
+Then, reload your browser tab, and enjoy the new experience.
 
 ### 1.5.2. Change terminal font size
 

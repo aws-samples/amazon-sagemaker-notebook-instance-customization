@@ -20,7 +20,7 @@ BIN_DIR=$(get_bin_dir)
 
 # Install some useful CLI toolkits
 sudo yum install -y htop tree dstat dos2unix tig
-sudo /usr/bin/pip3 install --no-cache-dir nbdime ranger-fm
+sudo /usr/bin/pip3 install --no-cache-dir nbdime ranger-fm cookiecutter
 mkdir -p /home/ec2-user/.config/ranger/
 echo set line_numbers relative >> /home/ec2-user/.config/ranger/rc.conf
 

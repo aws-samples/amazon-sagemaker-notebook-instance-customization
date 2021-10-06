@@ -13,7 +13,11 @@ cat << EOF
 #                                                                             #
 #     sudo initctl restart jupyter-server --no-wait                           #
 #                                                                             #
-# then, refresh your browser tab.                                             #
+# After the command, the Jupyter interface will probably freeze, which is     #
+# expected.
+
+#
+# Then, refresh your browser tab, and enjoy the new experience.               #
 EOF
 
 GIT_VERSION=$(git --version)
