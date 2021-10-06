@@ -22,6 +22,14 @@ This repo contains scripts to re-run common tweaks on a fresh (i.e., newly
 created or rebooted) SageMaker **classic** notebook instance, to make the
 notebook instance a little bit more ergonomic for prolonged usage.
 
+After running these scripts your default command-line terminal will go from this:
+
+<img width="363" alt="before_cli" src="https://user-images.githubusercontent.com/6405428/136099983-74691145-45eb-4d9f-be80-55ca731d2098.png">
+
+To something like this:
+
+<img width="489" alt="after_cli" src="https://user-images.githubusercontent.com/6405428/136099995-301c8b4b-4ae5-4b74-9117-615fce9190a3.png">
+
 Once installed, everytime you access a newly restarted notebook instance, you
 just need to perform these three short, simple steps to see and experience the
 customizations:
