@@ -176,7 +176,11 @@ step using SageMaker lifecycle config.
 On the Jupyter Lab's terminal, run this command:
 
 ```bash
+# For notebook instance with alinux
 sudo initctl restart jupyter-server --no-wait
+
+# Use this instead, for notebook instance with alinux2
+sudo systemctl restart jupyter-server
 ```
 
 After issuing the command, your Jupyter interface will probably freeze, which

@@ -3,6 +3,13 @@
 # After all customizations applied, do a final check and display next steps
 # to have the customizations in-effect.
 
+FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
+if [[ $FLAVOR == "Amazon Linux 2" ]]; then
+    CMD_RESTART="sudo systemctl restart jupyter-server        "
+else
+    CMD_RESTART="sudo initctl restart jupyter-server --no-wait"
+fi
+
 cat << EOF
 
 
@@ -11,7 +18,7 @@ cat << EOF
 #                                                                             #
 # First, restart the Jupyter process:                                         #
 #                                                                             #
-#     sudo initctl restart jupyter-server --no-wait                           #
+#     ${CMD_RESTART}                           #
 #                                                                             #
 # After the command, the Jupyter interface will probably freeze, which is     #
 # expected.
@@ -38,4 +45,5 @@ fi
 
 cat << EOF
 ###############################################################################
+
 EOF
