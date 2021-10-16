@@ -22,9 +22,9 @@ for i in "${PKG[@]}"; do
 done
 
 # pre-commit cache survives reboot (NOTE: can also set $PRE_COMMIT_HOME)
-mkdir -p ~/SageMaker/.pre-commit.cache
-ln -s ~/SageMaker/.pre-commit.cache ~/.cache/pre-commit
+mkdir -p ~/SageMaker/.initsmnb.d/.pre-commit.cache
+ln -s ~/SageMaker/.initsmnb.d/.pre-commit.cache ~/.cache/pre-commit
 
 # ranger defaults to relative line number
-mkdir -p /home/ec2-user/.config/ranger/
-echo set line_numbers relative >> /home/ec2-user/.config/ranger/rc.conf
+mkdir -p ~/.config/ranger/
+echo set line_numbers relative >> ~/.config/ranger/rc.conf

@@ -2,9 +2,9 @@
 
 echo "Change ipython color scheme on something.__class__ from dark blue (nearly invisible) to a more sane color."
 
-mkdir -p /home/ec2-user/.ipython/profile_default/
+mkdir -p ~/.ipython/profile_default/
 
-cat << EOF >> /home/ec2-user/.ipython/profile_default/ipython_config.py
+cat << EOF >> ~/.ipython/profile_default/ipython_config.py
 c.TerminalInteractiveShell.highlight_matching_brackets = True
 
 from pygments.token import Name
@@ -18,10 +18,10 @@ EOF
 echo "Add ipython keybindings when connecting from OSX"
 IPYTHON_STARTUP_DIR=.ipython/profile_default/startup
 IPYTHON_STARTUP_CFG=${IPYTHON_STARTUP_DIR}/01-osx-jupyterlab-keys.py
-[[ ! -f /home/ec2-user/SageMaker/${IPYTHON_STARTUP_CFG} ]] && \
-    mkdir -p /home/ec2-user/SageMaker/${IPYTHON_STARTUP_DIR}
-    cp -a $IPYTHON_STARTUP_CFG /home/ec2-user/SageMaker/${IPYTHON_STARTUP_CFG}
-mkdir -p /home/ec2-user/${IPYTHON_STARTUP_DIR}
-[[ ! -f /home/ec2-user/${IPYTHON_STARTUP_CFG} ]] && ln -s \
-    /home/ec2-user/SageMaker/${IPYTHON_STARTUP_CFG} \
-    /home/ec2-user/${IPYTHON_STARTUP_CFG}
+
+BIN_DIR=$(dirname "$(readlink -f ${BASH_SOURCE[0]})")
+
+mkdir -p ~/${IPYTHON_STARTUP_DIR}/
+[[ ! -f ~/${IPYTHON_STARTUP_CFG} ]] && ln -s \
+    $BIN_DIR/${IPYTHON_STARTUP_CFG} \
+    ~/${IPYTHON_STARTUP_CFG}

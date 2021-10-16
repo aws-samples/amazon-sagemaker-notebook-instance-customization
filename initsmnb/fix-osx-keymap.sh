@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Generating ~/.inputrc to fix a few bash shortcuts when browser runs on OSX..."
-cat << EOF >> /home/ec2-user/.inputrc
+cat << EOF >> ~/.inputrc
 # A few bash shortcuts when browser runs on OSX
 "ƒ": forward-word
 "∫": backward-word
@@ -10,10 +10,10 @@ cat << EOF >> /home/ec2-user/.inputrc
 EOF
 
 echo "Enabling keymap in ~/.bash_profile ..."
-cat << EOF >> /home/ec2-user/.bash_profile
+cat << EOF >> ~/.bash_profile
 
 # Fix a few bash shortcuts when browser runs on OSX
-bind -f /home/ec2-user/.inputrc
+bind -f ~/.inputrc
 EOF
 
 echo "Keymap set to deal with OSX quirks."

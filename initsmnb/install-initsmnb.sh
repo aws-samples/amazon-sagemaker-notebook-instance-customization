@@ -3,13 +3,15 @@
 ################################################################################
 # Global vars
 ################################################################################
-INITSMNB_DIR=/home/ec2-user/SageMaker/initsmnb
+INITSMNB_DIR=~/SageMaker/initsmnb
 SRC_PREFIX=https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-notebook-instance-customization/main/initsmnb
 # Uncomment for testing remote install from local source
 #SRC_PREFIX=file:///home/ec2-user/SageMaker/amazon-sagemaker-notebook-instance-customization/initsmnb
 
 declare -a SCRIPTS=(
     TEMPLATE-setup-my-sagemaker.sh
+    cli-alinux.sh
+    cli-alinux2.sh
     adjust-sm-git.sh
     change-fontsize.sh
     fix-ipython.sh

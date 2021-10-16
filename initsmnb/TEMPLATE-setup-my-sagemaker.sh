@@ -18,7 +18,9 @@ get_bin_dir() {
 
 BIN_DIR=$(get_bin_dir)
 
-# Install some CLI tools
+# Placeholder to store persistent config files
+mkdir ~/SageMaker/.initsmnb.d
+
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 [[ $FLAVOR == "Amazon Linux 2" ]] \
     && ${BIN_DIR}/cli-alinux2.sh \
