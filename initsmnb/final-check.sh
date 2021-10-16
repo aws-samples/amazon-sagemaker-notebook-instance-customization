@@ -21,9 +21,8 @@ cat << EOF
 #     ${CMD_RESTART}                           #
 #                                                                             #
 # After the command, the Jupyter interface will probably freeze, which is     #
-# expected.
-
-#
+# expected.                                                                   #
+#                                                                             #
 # Then, refresh your browser tab, and enjoy the new experience.               #
 EOF
 

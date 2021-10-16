@@ -1,22 +1,21 @@
-# 1. Sample Scripts to Customize SageMaker Notebook Instance
+# Sample Scripts to Customize SageMaker Notebook Instance <!-- omit in toc -->
 
 Table of contents:
 
-- [1. Sample Scripts to Customize SageMaker Notebook Instance](#1-sample-scripts-to-customize-sagemaker-notebook-instance)
-  - [1.1. Overview](#11-overview)
-  - [1.2. Non-exhaustive list of customizations](#12-non-exhaustive-list-of-customizations)
-  - [1.3. Installation](#13-installation)
-    - [1.3.1. Installation from github](#131-installation-from-github)
-    - [1.3.2. Installation from local source](#132-installation-from-local-source)
-  - [1.4. Usage](#14-usage)
-  - [1.5. Appendix](#15-appendix)
-    - [1.5.1. Restart JupyterLab](#151-restart-jupyterlab)
-    - [1.5.2. Change terminal font size](#152-change-terminal-font-size)
-  - [1.6. Related Projects](#16-related-projects)
-  - [1.7. Security](#17-security)
-  - [1.8. License](#18-license)
+- [1. Overview](#1-overview)
+- [2. Non-exhaustive list of customizations](#2-non-exhaustive-list-of-customizations)
+- [3. Installation](#3-installation)
+  - [3.1. Installation from github](#31-installation-from-github)
+  - [3.2. Installation from local source](#32-installation-from-local-source)
+- [4. Usage](#4-usage)
+- [5. Appendix](#5-appendix)
+  - [5.1. Restart JupyterLab](#51-restart-jupyterlab)
+  - [5.2. Change terminal font size](#52-change-terminal-font-size)
+- [6. Related Projects](#6-related-projects)
+- [7. Security](#7-security)
+- [8. License](#8-license)
 
-## 1.1. Overview
+# 1. Overview
 
 This repo contains scripts to re-run common tweaks on a fresh (i.e., newly
 created or rebooted) SageMaker **classic** notebook instance, to make the
@@ -45,7 +44,7 @@ more sophisticated automation tools or services.
 
 We hope that you find this repo useful to adopt into your daily work habits.
 
-## 1.2. Non-exhaustive list of customizations
+# 2. Non-exhaustive list of customizations
 
 Please note that tweaks marked with **\[Need sudo\]** can only be in-effect when
 your notebook instance enables
@@ -60,23 +59,27 @@ your notebook instance enables
     This allows for a "persistent" conda environment under `/home/ec2-user/SageMaker/envs` that
     survives instance reboot.
 
-    Note that after you create a new custom conda environment, e.g.,
-    `conda create --prefix /home/ec2-user/SageMaker/envs/MY_CUSTOM_ENV_NAME python=3.9 ipykernel`
-    you may need to [restart JupyterLab](#appendix-restart-jupyterlab) before you can see the
-    environment listed as one of the kernels.
+    You can create a new custom conda environment as follows:
+    `conda create --prefix /home/ec2-user/SageMaker/envs/MY_CUSTOM_ENV_NAME python=3.9 ipykernel`.
+    Replace the environment name and python version with your choice. Please note that conda
+    environment must have `ipykernel` package installed. Once the environment is created, you may
+    need to [restart JupyterLab](#appendix-restart-jupyterlab) before you can see the environment
+    listed as one of the kernels.
 
 - Git:
   - Optionally change committer's name and email, which defaults to `ec2-user`
   - git aliases: `git lol`, `git lola`, `git lolc`, and `git lolac`
   - New repo (i.e., `git init`) defaults to branch `main`
-  - **\[Need sudo\]** `nbdime` for notebook-friendly diffs
+  - `nbdime` for notebook-friendly diffs
 
 - Terminal:
   - `bash` shortcuts: `alt-.`, `alt-b`, `alt-d`, and `alt-f` work even when
     connecting from OSX.
   - **\[Need sudo\]** Install command lines: `htop`, `tree`, `dos2unix`,
     `dstat`, `tig`, `ranger` (the CLI file explorer),
-    [cookiecutter](https://pypi.org/project/cookiecutter/).
+    [cookiecutter](https://pypi.org/project/cookiecutter/),
+    [pre-commit](https://pre-commit.com/)
+    - `pre-commit` caches of hook repositories survive reboots
     - `ranger` is configured to use relative line numbers
 
 - ipython run from Jupyter Lab's terminal:
@@ -96,7 +99,7 @@ your notebook instance enables
 
 - **\[Need sudo\]** Optionally mount one or more EFS.
 
-## 1.3. Installation
+# 3. Installation
 
 This step needs to be done **once** on a newly *created* notebook instance.
 
@@ -107,7 +110,7 @@ instance has the necessary network access to this repo.
 Another choice is to bootstrap this repo into your SageMaker classic notebook
 instance, then invoke the install script in its local mode.
 
-### 1.3.1. Installation from github
+## 3.1. Installation from github
 
 Go to the Jupyter Lab on your SageMaker notebook instance. Open a terminal,
 then run this command:
@@ -142,7 +145,7 @@ be mounted as `/home/ec2-user/mnt/my_efs_02/`.
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
 Your next step is to jump to section [Usage](#14-usage).
 
-### 1.3.2. Installation from local source
+## 3.2. Installation from local source
 
 On your SageMaker notebook instance, open a terminal and run these commands:
 
@@ -156,7 +159,7 @@ cd amazon-sagemaker-notebook-instance-customization/initsmnb
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
 Your next step is to jump to section [Usage](#14-usage).
 
-## 1.4. Usage
+# 4. Usage
 
 Once installed, you should see file `/home/ec2-user/SageMaker/initsmnb/setup-my-sagemaker.sh`.
 
@@ -169,9 +172,9 @@ Due to how SageMaker notebook works, please re-run `setup-my-sagemaker.sh` on a
 newly *started* or *restarted* instance. You may even consider to automate this
 step using SageMaker lifecycle config.
 
-## 1.5. Appendix
+# 5. Appendix
 
-### 1.5.1. Restart JupyterLab
+## 5.1. Restart JupyterLab
 
 On the Jupyter Lab's terminal, run this command:
 
@@ -188,7 +191,7 @@ is expected.
 
 Then, reload your browser tab, and enjoy the new experience.
 
-### 1.5.2. Change terminal font size
+## 5.2. Change terminal font size
 
 To change the terminal font size, after installation
 
@@ -196,7 +199,7 @@ To change the terminal font size, after installation
 2. go to the section that customizes the terminal,
 3. then change the fontsize (default is 10) to another value of your choice.
 
-## 1.6. Related Projects
+# 6. Related Projects
 
 Once you've customized your development environment on your SageMaker classic
 notebook instance, we invite you to explore related samples.
@@ -230,10 +233,10 @@ notebook instance, we invite you to explore related samples.
    hosts a simple template to set up basic Vim, Tmux, Zsh for the Deep Learning
    AMI Amazon Linux 2 for data scientists.
 
-## 1.7. Security
+# 7. Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
-## 1.8. License
+# 8. License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.

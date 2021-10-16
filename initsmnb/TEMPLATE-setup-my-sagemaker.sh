@@ -18,12 +18,10 @@ get_bin_dir() {
 
 BIN_DIR=$(get_bin_dir)
 
-# Install some useful CLI toolkits
-sudo yum install -y htop tree dstat dos2unix tig
-sudo /usr/bin/pip3 install --no-cache-dir nbdime ranger-fm cookiecutter
-mkdir -p /home/ec2-user/.config/ranger/
-echo set line_numbers relative >> /home/ec2-user/.config/ranger/rc.conf
+# Placeholder to store persistent config files
+mkdir ~/SageMaker/.initsmnb.d
 
+${BIN_DIR}/install-cli.sh
 ${BIN_DIR}/adjust-sm-git.sh 'Firstname Lastname' first.last@email.abc
 ${BIN_DIR}/change-fontsize.sh
 ${BIN_DIR}/fix-osx-keymap.sh

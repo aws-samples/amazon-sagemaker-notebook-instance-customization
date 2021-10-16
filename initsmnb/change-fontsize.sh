@@ -1,5 +1,5 @@
 #!/bin/bash
-JUPYTER_CONFIG_ROOT=/home/ec2-user/.jupyter/lab/user-settings/\@jupyterlab
+JUPYTER_CONFIG_ROOT=~/.jupyter/lab/user-settings/\@jupyterlab
 
 echo "After this script finishes, reload the Jupyter-Lab page in your browser."
 

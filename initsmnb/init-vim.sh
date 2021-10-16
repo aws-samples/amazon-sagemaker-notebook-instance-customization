@@ -1,13 +1,13 @@
 #!/bin/bash
 
-VIM_SM_ROOT=/home/ec2-user/SageMaker
+VIM_SM_ROOT=~/SageMaker/.initsmnb.d
 VIM_RTP=${VIM_SM_ROOT}/.vim
 VIMRC=${VIM_SM_ROOT}/.vimrc
 
 apply_vim_setting() {
     # vimrc
-    [[ -f /home/ec2-user/.vimrc ]] && rm /home/ec2-user/.vimrc
-    ln -s ${VIMRC} /home/ec2-user/.vimrc
+    [[ -f ~/.vimrc ]] && rm ~/.vimrc
+    ln -s ${VIMRC} ~/.vimrc
 
     echo "Vim initialized"
 }

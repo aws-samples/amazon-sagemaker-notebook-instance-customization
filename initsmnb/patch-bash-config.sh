@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat << EOF >> /home/ec2-user/.bash_profile
+cat << EOF >> ~/.bash_profile
 
 # Workaround: when starting tmux from conda env, deactivate in all tmux sessions.
 if [[ ! -z "\$TMUX" ]]; then
@@ -12,8 +12,8 @@ EOF
 
 
 # PS1 must preceed conda bash.hook, to correctly display CONDA_PROMPT_MODIFIER
-cp /home/ec2-user/.bashrc{,.ori}
-cat << EOF > /home/ec2-user/.bashrc
+cp ~/.bashrc{,.ori}
+cat << EOF > ~/.bashrc
 git_branch() {
    local branch=\$(/usr/bin/git branch 2>/dev/null | grep '^*' | colrm 1 2)
    [[ "\$branch" == "" ]] && echo "" || echo "(\$branch) "
@@ -32,10 +32,10 @@ EOF
 
 
 # Original .bashrc content
-cat /home/ec2-user/.bashrc.ori >> /home/ec2-user/.bashrc
+cat ~/.bashrc.ori >> ~/.bashrc
 
 # Custom aliases
-cat << EOF >> /home/ec2-user/.bashrc
+cat << EOF >> ~/.bashrc
 
 alias ll='ls -alF --color=auto'
 EOF
