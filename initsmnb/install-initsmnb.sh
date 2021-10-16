@@ -10,8 +10,7 @@ SRC_PREFIX=https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-notebo
 
 declare -a SCRIPTS=(
     TEMPLATE-setup-my-sagemaker.sh
-    cli-alinux.sh
-    cli-alinux2.sh
+    install-cli.sh
     adjust-sm-git.sh
     change-fontsize.sh
     fix-ipython.sh

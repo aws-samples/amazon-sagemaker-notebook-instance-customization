@@ -21,11 +21,7 @@ BIN_DIR=$(get_bin_dir)
 # Placeholder to store persistent config files
 mkdir ~/SageMaker/.initsmnb.d
 
-FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
-[[ $FLAVOR == "Amazon Linux 2" ]] \
-    && ${BIN_DIR}/cli-alinux2.sh \
-    || ${BIN_DIR}/cli-alinux.sh
-
+${BIN_DIR}/install-cli.sh
 ${BIN_DIR}/adjust-sm-git.sh 'Firstname Lastname' first.last@email.abc
 ${BIN_DIR}/change-fontsize.sh
 ${BIN_DIR}/fix-osx-keymap.sh
