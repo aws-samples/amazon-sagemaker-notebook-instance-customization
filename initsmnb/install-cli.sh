@@ -1,8 +1,14 @@
 #!/bin/bash
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
-[[ $FLAVOR == "Amazon Linux 2" ]] && sudo amazon-linux-extras install -y vim epel
-sudo yum install -y htop tree dstat dos2unix tig
+if [[ $FLAVOR == "Amazon Linux 2" ]]; then
+    # Slow install; hence disabled by default
+    #sudo amazon-linux-extras install -y epel
+    #sudo yum install -y tig
+    sudo yum install -y htop tree dstat dos2unix
+else
+    sudo yum install -y htop tree dstat dos2unix tig
+fi
 
 ~/anaconda3/bin/nbdime config-git --enable --global
 
@@ -11,15 +17,25 @@ sudo yum install -y htop tree dstat dos2unix tig
 # either to minimize polluting its site packages.
 ~/anaconda3/bin/pip3 install --no-cache-dir pipx
 
+# Relocate pipx packages to ~/SageMaker to survive reboot
+export PIPX_HOME=~/SageMaker/.initsmnb.d/pipx
+export PIPX_BIN_DIR=~/SageMaker/.initsmnb.d/bin
+cat << EOF >> ~/.bashrc
+export PATH=\$PATH:$PIPX_BIN_DIR
+export PIPX_HOME=$PIPX_HOME
+EOF
+
 # Stop 'pipx install' from warning about path
-PATH=$PATH:~/.local/bin
+export PATH=$PATH:$PIPX_BIN_DIR
 
 declare -a PKG=(
     pre-commit
     ranger-fm
     cookiecutter
     jupytext
+    s4cmd
 )
+
 for i in "${PKG[@]}"; do
     ~/anaconda3/bin/pipx install $i
 done
