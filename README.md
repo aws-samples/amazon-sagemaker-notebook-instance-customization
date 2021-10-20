@@ -76,9 +76,9 @@ your notebook instance enables
   - `bash` shortcuts: `alt-.`, `alt-b`, `alt-d`, and `alt-f` work even when
     connecting from OSX.
   - **\[Need sudo\]** Install command lines: `htop`, `tree`, `dos2unix`,
-    `dstat`, `tig`, `ranger` (the CLI file explorer),
+    `dstat`, `tig` (alinux only), `ranger` (the CLI file explorer),
     [cookiecutter](https://pypi.org/project/cookiecutter/),
-    [pre-commit](https://pre-commit.com/)
+    [pre-commit](https://pre-commit.com/), `s4cmd`
     - `pre-commit` caches of hook repositories survive reboots
     - `ranger` is configured to use relative line numbers
 
