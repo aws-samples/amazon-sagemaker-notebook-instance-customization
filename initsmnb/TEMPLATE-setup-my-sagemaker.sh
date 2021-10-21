@@ -19,7 +19,7 @@ get_bin_dir() {
 BIN_DIR=$(get_bin_dir)
 
 # Placeholder to store persistent config files
-mkdir ~/SageMaker/.initsmnb.d
+mkdir -p ~/SageMaker/.initsmnb.d
 
 ${BIN_DIR}/install-cli.sh
 ${BIN_DIR}/adjust-sm-git.sh 'Firstname Lastname' first.last@email.abc
