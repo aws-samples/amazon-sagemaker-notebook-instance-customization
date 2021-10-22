@@ -165,19 +165,18 @@ chmod ugo+x setup-my-sagemaker.sh
 
 EPILOGUE=$(cat << EOF
 
-###############################################################
-# Installation completed.                                     #
-#                                                             #
-# To change this session, run:                                #
-#                                                             #
-#     ${INITSMNB_DIR}/setup-my-sagemaker.sh #
-#                                                             #
-# or the shorter form:                                        #
-#                                                             #
-#     ~/SageMaker/initsmnb/setup-my-sagemaker.sh              #
-#                                                             #
-# On notebook restart, also run that same command.            #
-###############################################################
+####################################################
+# Installation completed.                          #
+#                                                  #
+# You may want to enable optional tweaks in file   #
+# ~/SageMaker/initsmnb/setup-my-sagemaker.sh       #
+#                                                  #
+# To change this session, run:                     #
+#                                                  #
+#     ~/SageMaker/initsmnb/setup-my-sagemaker.sh   #
+#                                                  #
+# On notebook restart, also run that same command. #
+####################################################
 EOF
 )
 echo -e "${EPILOGUE}\n"
