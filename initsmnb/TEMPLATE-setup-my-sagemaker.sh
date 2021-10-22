@@ -33,5 +33,13 @@ ${BIN_DIR}/mount-efs-accesspoint.sh fsid,fsapid,mountpoint
 # These require jupyter lab restarted and browser reloaded, to see the changes.
 ${BIN_DIR}/patch-jupyter-config.sh
 
+# Disable jupyterlab git extension
+#~/anaconda3/envs/JupyterSystemEnv/bin/jupyter labextension disable '@jupyterlab/git'
+
+# Enable SageMaker local mode
+#curl -sfL \
+#    https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-local-mode/main/blog/pytorch_cnn_cifar10/setup.sh \
+#    | /bin/bash -s
+
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
