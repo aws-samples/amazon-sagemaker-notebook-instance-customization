@@ -40,7 +40,7 @@ cat << EOF >> ~/.bashrc
 alias ll='ls -alF --color=auto'
 
 # Better dir color on dark terminal: changed from dark blue to lighter blue
-export LS_COLORS=$LS_COLORS'di=38;5;39':
+export LS_COLORS="$LS_COLORS"'di=38;5;39'
 EOF
 
 
