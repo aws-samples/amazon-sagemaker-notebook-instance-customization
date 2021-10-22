@@ -38,9 +38,10 @@ cat ~/.bashrc.ori >> ~/.bashrc
 cat << EOF >> ~/.bashrc
 
 alias ll='ls -alF --color=auto'
-EOF
 
 # Better dir color on dark terminal: changed from dark blue to lighter blue
 export LS_COLORS=$LS_COLORS'di=38;5;39':
+EOF
+
 
 #echo "On a new SageMaker terminal, which uses 'sh' by default, type 'bash -l' (without the quotes)"
