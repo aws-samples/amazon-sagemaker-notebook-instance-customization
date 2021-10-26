@@ -11,6 +11,8 @@ else
 fi
 
 ~/anaconda3/bin/nbdime config-git --enable --global
+ln -s ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/.local/bin
+ln -s ~/anaconda3/bin/git-nb* ~/.local/bin
 
 # Pipx to install pre-commit. Otherwise, pre-commit is broken when installed
 # with /usr/bin/pip3 (alinux), but we don't want to use ~/anaconda/bin/pip3

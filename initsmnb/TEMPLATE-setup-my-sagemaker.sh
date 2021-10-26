@@ -21,6 +21,10 @@ BIN_DIR=$(get_bin_dir)
 # Placeholder to store persistent config files
 mkdir -p ~/SageMaker/.initsmnb.d
 
+# Hold symlinks of select binaries from the 'base' conda environment, so that
+# custom environments don't have to install them, e.g., nbdime, docker-compose.
+mkdir -p ~/.local/bin
+
 ${BIN_DIR}/install-cli.sh
 ${BIN_DIR}/adjust-sm-git.sh 'Firstname Lastname' first.last@email.abc
 ${BIN_DIR}/change-fontsize.sh
@@ -37,6 +41,7 @@ ${BIN_DIR}/patch-jupyter-config.sh
 #~/anaconda3/envs/JupyterSystemEnv/bin/jupyter labextension disable '@jupyterlab/git'
 
 # Enable SageMaker local mode
+#ln -s ~/anaconda3/bin/docker-compose ~/.local/bin/
 #curl -sfL \
 #    https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-local-mode/main/blog/pytorch_cnn_cifar10/setup.sh \
 #    | /bin/bash -s
