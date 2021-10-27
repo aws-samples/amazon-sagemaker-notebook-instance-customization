@@ -23,8 +23,12 @@ ln -s ~/anaconda3/bin/git-nb* ~/.local/bin
 export PIPX_HOME=~/SageMaker/.initsmnb.d/pipx
 export PIPX_BIN_DIR=~/SageMaker/.initsmnb.d/bin
 cat << EOF >> ~/.bashrc
-export PATH=\$PATH:$PIPX_BIN_DIR
+# Add pipx binaries to PATH. In addition, add also ~/.local/bin so that its
+# commands are usable by Jupyter kernels (notable example: docker-compose for
+# SageMaker local mode).
+export PATH=\$PATH:$PIPX_BIN_DIR:/home/ec2-user/.local/bin
 export PIPX_HOME=$PIPX_HOME
+export PIPX_BIN_DIR=$PIPX_BIN_DIR
 EOF
 
 # Stop 'pipx install' from warning about path
