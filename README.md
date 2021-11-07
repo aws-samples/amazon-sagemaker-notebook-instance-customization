@@ -11,6 +11,7 @@ Table of contents:
 - [5. Appendix](#5-appendix)
   - [5.1. Restart JupyterLab](#51-restart-jupyterlab)
   - [5.2. Change terminal font size](#52-change-terminal-font-size)
+  - [5.3. Experimental Tweaks](#53-experimental-tweaks)
 - [6. Related Projects](#6-related-projects)
 - [7. Security](#7-security)
 - [8. License](#8-license)
@@ -198,6 +199,32 @@ To change the terminal font size, after installation
 1. open `/home/ec2-user/SageMaker/initsmnb/change-fontsize.sh` in a text editor,
 2. go to the section that customizes the terminal,
 3. then change the fontsize (default is 10) to another value of your choice.
+
+## 5.3. Experimental Tweaks
+
+Advance users may want to explore and enable the experimental tweaks. These are off by default, and
+must be enabled by modifying `~/SageMaker/initsmnb/setup-my-sagemaker.sh` to set
+`ENABLE_EXPERIMENTAL=1`. Please refers to the script itself to find out the details of the tweaks.
+
+Presently, these are the experimental tweaks:
+
+- disable the git extension for Jupyter Lab. This is aimed for power users who primarily use git
+  from CLI, and do not want to be distracted by Jupyter Lab's frequent refreshes on the lower-left
+  status bar.
+
+- enable SageMaker local mode.
+
+- relocate docker's data-root to persistent area `~/SageMaker/.initsmnb.d/docker/`, so that your
+  `docker images` won't show empty images anymore (provided you've docker build or pull before).
+
+- relocate docker's tmpdir to persistent area `~/SageMaker/.initsmnb.d/tmp/`, so that you can build
+  large custom images that require more space than what `/tmp` (i.e., on root volume) provides.
+
+  - a secondary benefit is to allow SageMaker local mode to run with S3 input that's larger than
+    what `/tmp` (i.e., on root volume) provides. Please note SageMaker local mode will copy the
+    S3 input to the docker's tmpdir, but upon completion the SDK won't remove the tmp dir. Hence,
+    you need to manually remove the temporary S3 inputs from the persistent docker's tmpdir.
+
 
 # 6. Related Projects
 
