@@ -20,6 +20,10 @@ declare -a SCRIPTS=(
     patch-bash-config.sh
     patch-jupyter-config.sh
     final-check.sh
+    enable-sm-local-mode.sh
+    change-docker-data-root.sh
+    change-docker-tmp-dir.sh
+    restart-docker.sh
 )
 
 declare -a NESTED_FILES=(

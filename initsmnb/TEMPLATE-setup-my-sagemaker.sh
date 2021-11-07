@@ -17,6 +17,7 @@ get_bin_dir() {
 }
 
 BIN_DIR=$(get_bin_dir)
+ENABLE_EXPERIMENTAL=0
 
 # Placeholder to store persistent config files
 mkdir -p ~/SageMaker/.initsmnb.d
@@ -37,14 +38,18 @@ ${BIN_DIR}/mount-efs-accesspoint.sh fsid,fsapid,mountpoint
 # These require jupyter lab restarted and browser reloaded, to see the changes.
 ${BIN_DIR}/patch-jupyter-config.sh
 
-# Disable jupyterlab git extension
-#~/anaconda3/envs/JupyterSystemEnv/bin/jupyter labextension disable '@jupyterlab/git'
+if [[ $ENABLE_EXPERIMENTAL == 1 ]]; then
+    # NOTE: comment or uncomment tweaks in this stanza as necessary.
 
-# Enable SageMaker local mode
-#ln -s ~/anaconda3/bin/docker-compose ~/.local/bin/
-#curl -sfL \
-#    https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-local-mode/main/blog/pytorch_cnn_cifar10/setup.sh \
-#    | /bin/bash -s
+    # Disable jupyterlab git extension. For power git users, who don't like to
+    # be distracted by jlab's frequent status changes on lower-left status bar.
+    ~/anaconda3/envs/JupyterSystemEnv/bin/jupyter labextension disable '@jupyterlab/git'
+
+    ${BIN_DIR}/enable-sm-local-mode.sh
+    ${BIN_DIR}/change-docker-data-root.sh
+    ${BIN_DIR}/change-docker-tmp-dir.sh
+    ${BIN_DIR}/restart-docker.sh
+fi
 
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
