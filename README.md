@@ -221,8 +221,9 @@ Presently, these are the experimental tweaks:
 
 - enable SageMaker local mode.
 
-- relocate docker's data-root to persistent area `~/SageMaker/.initsmnb.d/docker/`, so that your
-  `docker images` won't show empty images anymore (provided you've docker build or pull before).
+- relocate docker's data-root to persistent area `~/SageMaker/.initsmnb.d/docker/`, so that after
+  reboot, your `docker images` won't show empty images anymore (provided you've docker build or pull
+  before).
 
 - relocate docker's tmpdir to persistent area `~/SageMaker/.initsmnb.d/tmp/`, so that you can build
   large custom images that require more space than what `/tmp` (i.e., on root volume) provides.
