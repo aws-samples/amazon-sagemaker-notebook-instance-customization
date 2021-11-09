@@ -40,6 +40,8 @@ declare -a PKG=(
     cookiecutter
     jupytext
     s4cmd
+    black
+    black-nb
 )
 
 for i in "${PKG[@]}"; do

@@ -52,7 +52,7 @@ your notebook instance enables
 [root access for notebook users](https://aws.amazon.com/blogs/machine-learning/control-root-access-to-amazon-sagemaker-notebook-instances/).
 
 - Jupyter Lab:
-  - Reduce font size on Jupyter Lab
+  - Reduce font size on Jupyter Lab, and show line numbers on editors.
   - **\[Need sudo\]** Terminal defaults to `bash` shell, dark theme, and smaller font.
   - **\[Need sudo\]** In addition to SageMaker's built-in conda environments, Jupyter Lab to also
     auto-scan `/home/ec2-user/SageMaker/envs/` for custom conda environments.
@@ -79,7 +79,11 @@ your notebook instance enables
   - **\[Need sudo\]** Install command lines: `htop`, `tree`, `dos2unix`,
     `dstat`, `tig` (alinux only), `ranger` (the CLI file explorer),
     [cookiecutter](https://pypi.org/project/cookiecutter/),
-    [pre-commit](https://pre-commit.com/), `s4cmd`
+    [pre-commit](https://pre-commit.com/),
+    [s4cmd](https://github.com/bloomreach/s4cmd),
+    [black-nb](https://github.com/tomcatling/black-nb),
+    [black](https://github.com/psf/black),
+    [jupytext](https://github.com/mwouts/jupytext)
     - `pre-commit` caches of hook repositories survive reboots
     - `ranger` is configured to use relative line numbers
 
