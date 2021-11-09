@@ -88,7 +88,7 @@ your notebook instance enables
     - `ranger` is configured to use relative line numbers
     - Whenever possible, commands are installed to the persistent area under
       `~/SageMaker/.initsmnb.d/`, so that on reboot, the tweaking script can
-      skip re-installing those commands to speed-up the runtime.
+      skip re-installing those commands to speed-up the tweaking time.
 
 - ipython run from Jupyter Lab's terminal:
   - shortcuts: `alt-.`, `alt-b`, `alt-d`, and `alt-f` work even when connecting
