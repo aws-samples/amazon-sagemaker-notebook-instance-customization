@@ -12,7 +12,7 @@ declare -a SCRIPTS=(
     TEMPLATE-setup-my-sagemaker.sh
     install-cli.sh
     adjust-sm-git.sh
-    change-fontsize.sh
+    change-jlab-ui.sh
     fix-ipython.sh
     fix-osx-keymap.sh
     init-vim.sh

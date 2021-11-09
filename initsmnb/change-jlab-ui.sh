@@ -43,7 +43,8 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/fileeditor-extension/plugin.jupyterlab-setting
 {
     "editorConfig": {
         "rulers": [80, 100],
-        "codeFolding": true
+        "codeFolding": true,
+        "lineNumbers": true
     }
 }
 EOF
@@ -52,13 +53,16 @@ mkdir -p $JUPYTER_CONFIG_ROOT/notebook-extension/
 cat << EOF > $JUPYTER_CONFIG_ROOT/notebook-extension/tracker.jupyterlab-settings
 {
     "codeCellConfig": {
-        "rulers": [80, 100]
+        "rulers": [80, 100],
+        "lineNumbers": true
     },
     "markdownCellConfig": {
-        "rulers": [80, 100]
+        "rulers": [80, 100],
+        "lineNumbers": true
     },
     "rawCellConfig": {
-        "rulers": [80, 100]
+        "rulers": [80, 100],
+        "lineNumbers": true
     }
 }
 EOF

@@ -196,7 +196,7 @@ Then, reload your browser tab, and enjoy the new experience.
 
 To change the terminal font size, after installation
 
-1. open `/home/ec2-user/SageMaker/initsmnb/change-fontsize.sh` in a text editor,
+1. open `/home/ec2-user/SageMaker/initsmnb/change-jlab-ui.sh` in a text editor,
 2. go to the section that customizes the terminal,
 3. then change the fontsize (default is 10) to another value of your choice.
 
