@@ -15,6 +15,7 @@ Table of contents:
 - [6. Related Projects](#6-related-projects)
 - [7. Security](#7-security)
 - [8. License](#8-license)
+- [9. Acknowledgements](#9-acknowledgements)
 
 # 1. Overview
 
@@ -233,7 +234,6 @@ Presently, these are the experimental tweaks:
     S3 input to the docker's tmpdir, but upon completion the SDK won't remove the tmp dir. Hence,
     you need to manually remove the temporary S3 inputs from the persistent docker's tmpdir.
 
-
 # 6. Related Projects
 
 Once you've customized your development environment on your SageMaker classic
@@ -275,3 +275,8 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 # 8. License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
+
+# 9. Acknowledgements
+
+[@yapweiyih](https://github.com/yapweiyih) (EFS), [@josiahdavis](https://github.com/josiahdavis) and [@kianho](https://github.com/kianho) (vim), [@theoldfather](https://github.com/theoldfather) (docker relocation), [@aws/amazon-sagemaker-examples](https://github.com/aws/amazon-sagemaker-examples) (SageMaker local mode), [@yinsong1986](https://github.com/yinsong1986) (persistent custom conda environment), [@verdimrc](https://github.com/verdimrc) (misc.), the originator of git lol & lola (earlier traceable could be this
+[blog](http://blog.kfish.org/2010/04/git-lola.html).
