@@ -1,6 +1,54 @@
 #!/bin/bash
 
 ################################################################################
+# Must run only on a SageMaker classic notebook instance.
+################################################################################
+if [[ -d /var/log/studio/ ]]; then
+    cat << EOF
+
+###########################################################################
+# Installation declined.                                                  #
+#                                                                         #
+# Reason: /var/log/studio/ detected; probably this is a Studio notebook.  #
+#                                                                         #
+# Please make sure to run the installation script on a SageMaker classic  #
+# notebook instance.                                                      #
+#                                                                         #
+# If you still insists to proceed with the installation, please fork the  #
+# repo, edit the installation script to disable the relevant check. And   #
+# when you go this route, you're assumed to be proficient in shell        #
+# scriptings, and thus, able to navigate your way with the scripts.       #
+###########################################################################
+
+EOF
+    exit 1
+fi
+
+
+if [[ ! -f /etc/opt/ml/sagemaker-notebook-instance-config.json ]]; then
+    cat << EOF
+
+#############################################################################
+# Installation declined.                                                    #
+#                                                                           #
+# Reason: /etc/opt/ml/sagemaker-notebook-instance-config.json not detected; #
+# probably this is not a classic notebook instance.                         #
+#                                                                           #
+# Please make sure to run the installation script on a SageMaker classic    #
+# notebook instance.                                                        #
+#                                                                           #
+# If you still insist to proceed with the installation, please fork the     #
+# repo, edit the installation script to disable the relevant check. And     #
+# when you go this route, you're assumed to be proficient in shell          #
+# scriptings, and thus, able to navigate your way with the scripts.         #
+#############################################################################
+
+EOF
+    exit 2
+fi
+
+
+################################################################################
 # Global vars
 ################################################################################
 INITSMNB_DIR=~/SageMaker/initsmnb
@@ -10,6 +58,7 @@ SRC_PREFIX=https://raw.githubusercontent.com/aws-samples/amazon-sagemaker-notebo
 
 declare -a SCRIPTS=(
     TEMPLATE-setup-my-sagemaker.sh
+    ensure-smnb.sh
     install-cli.sh
     adjust-sm-git.sh
     change-jlab-ui.sh
