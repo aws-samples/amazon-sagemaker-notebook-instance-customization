@@ -19,6 +19,10 @@ get_bin_dir() {
 BIN_DIR=$(get_bin_dir)
 ENABLE_EXPERIMENTAL=0
 
+# Ensure that we run only on a SageMaker classic notebook instance.
+${BIN_DIR}/ensure-smnb.sh
+[[ $? != 0 ]] && exit 1
+
 # Placeholder to store persistent config files
 mkdir -p ~/SageMaker/.initsmnb.d
 
