@@ -76,6 +76,7 @@ declare -a SCRIPTS=(
     change-docker-data-root.sh
     change-docker-tmp-dir.sh
     restart-docker.sh
+    upgrade-jupyter.sh
 )
 
 declare -a NESTED_FILES=(
