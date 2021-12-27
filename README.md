@@ -286,5 +286,5 @@ This library is licensed under the MIT-0 License. See the LICENSE file.
 
 # 9. Acknowledgements
 
-[@yapweiyih](https://github.com/yapweiyih) (EFS), [@josiahdavis](https://github.com/josiahdavis) and [@kianho](https://github.com/kianho) (vim), [@theoldfather](https://github.com/theoldfather) (docker relocation), [@aws/amazon-sagemaker-examples](https://github.com/aws/amazon-sagemaker-examples) (SageMaker local mode), [@yinsong1986](https://github.com/yinsong1986) (persistent custom conda environment), [@verdimrc](https://github.com/verdimrc) (misc.), the originator of git lol & lola (earlier traceable could be this
+[@yapweiyih](https://github.com/yapweiyih) (EFS, Streamlit), [@josiahdavis](https://github.com/josiahdavis) and [@kianho](https://github.com/kianho) (vim), [@theoldfather](https://github.com/theoldfather) (docker relocation), [@aws/amazon-sagemaker-examples](https://github.com/aws/amazon-sagemaker-examples) (SageMaker local mode), [@yinsong1986](https://github.com/yinsong1986) (persistent custom conda environment), [@verdimrc](https://github.com/verdimrc) (misc.), the originator of git lol & lola (earlier traceable could be this
 [blog](http://blog.kfish.org/2010/04/git-lola.html).
