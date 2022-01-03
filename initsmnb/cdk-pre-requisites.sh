@@ -6,10 +6,10 @@ echo "Setup a few environment variables related to CDK"
 cat << EOF >> ~/.bashrc
 
 # NVM installation after this env. var. is effective should survive reboots.
-export NVM_DIR="$HOME/SageMaker/.initsmnb.d/.nvm"
+export NVM_DIR=\$HOME/SageMaker/.initsmnb.d/.nvm
 mkdir -p \$NVM_DIR
-[[ -s "\$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"  # Loads nvm
-[[ -s "\$NVM_DIR/bash_completion" ]] && . "$NVM_DIR/bash_completion"  # Loads nvm bash_completion
+[[ -s "\$NVM_DIR/nvm.sh" ]] && . "\$NVM_DIR/nvm.sh"  # Loads nvm
+[[ -s "\$NVM_DIR/bash_completion" ]] && . "\$NVM_DIR/bash_completion"  # Loads nvm bash_completion
 
 # To bootstrap CDK to the account ID associated with the current credential.
 # You may want to change to specific account ID instead.
