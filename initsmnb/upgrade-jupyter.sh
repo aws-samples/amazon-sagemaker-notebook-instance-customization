@@ -45,6 +45,7 @@ $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
 for i in $CONDA_ENV_DIR/share/jupyter/lab/extensions/jupyterlab-{celltags,toc,git}-*.tgz; do
     rm $i
 done
+rm $CONDA_ENV_DIR/share/jupyter/lab/extensions/sagemaker_examples-*.tgz
 
 
 ################################################################################
