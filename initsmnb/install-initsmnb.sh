@@ -61,13 +61,15 @@ declare -a SCRIPTS=(
     ensure-smnb.sh
     install-cli.sh
     adjust-sm-git.sh
-    change-jlab-ui.sh
-    fix-ipython.sh
     fix-osx-keymap.sh
-    init-vim.sh
-    mount-efs-accesspoint.sh
     patch-bash-config.sh
+    fix-ipython.sh
+    init-vim.sh
+    cdk-pre-requisites.sh
+    QUICKSTART-NVM-CDK.md
+    mount-efs-accesspoint.sh
     patch-jupyter-config.sh
+    change-jlab-ui.sh
     final-check.sh
     enable-sm-local-mode.sh
     change-docker-data-root.sh
