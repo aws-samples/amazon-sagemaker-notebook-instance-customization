@@ -18,19 +18,41 @@ fi
 CONDA_ENV_DIR=~/anaconda3/envs/JupyterSystemEnv/
 BIN_DIR=$CONDA_ENV_DIR/bin
 
-# Uninstall the old jupyter proxy
+# Uninstall the old jupyter proxy, to unblock Streamlit.
 $BIN_DIR/jupyter serverextension disable --py nbserverproxy
 sed -i \
     's/"nbserverproxy": true/"nbserverproxy": false/g' \
     $CONDA_ENV_DIR/etc/jupyter/jupyter_notebook_config.json
 $BIN_DIR/pip uninstall --yes nbserverproxy
 
+# Completely remove these unused or outdated Python packages.
+$BIN_DIR/pip uninstall --yes nbdime jupyterlab-git
+
+# These will be outdated by Jlab-3.x which has built-in versions of them.
+declare -a EXTS_TO_DEL=(
+    jupyterlab-celltags
+    jupyterlab-toc
+    jupyterlab-git
+    nbdime-jupyterlab
+
+    sagemaker_examples  # Won't work on jlab-3.x anyway.
+)
+for i in "${EXTS_TO_DEL[@]}"; do
+    rm $CONDA_ENV_DIR/share/jupyter/lab/extensions/$i-*.tgz
+done
+
 # Upgrade jlab & extensions
 declare -a PKGS=(
     notebook
     jupyterlab
-    jupyter_bokeh
     jupyter-server-proxy
+
+    jupyter
+    jupyter_client
+    jupyter_console
+    jupyter_core
+
+    jupyter_bokeh
     nbdime
 
     # jupyterlab_code_formatter requires formatters in its venv.
@@ -40,12 +62,6 @@ declare -a PKGS=(
     isort
 )
 $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
-
-# These are outdated by Jlab-3.x which has built-in versions of them.
-for i in $CONDA_ENV_DIR/share/jupyter/lab/extensions/jupyterlab-{celltags,toc,git}-*.tgz; do
-    rm $i
-done
-rm $CONDA_ENV_DIR/share/jupyter/lab/extensions/sagemaker_examples-*.tgz
 
 
 ################################################################################
