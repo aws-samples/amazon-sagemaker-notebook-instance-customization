@@ -38,6 +38,7 @@ ${BIN_DIR}/patch-bash-config.sh
 ${BIN_DIR}/fix-ipython.sh
 ${BIN_DIR}/init-vim.sh
 ${BIN_DIR}/install-cdk.sh
+${BIN_DIR}/fix-pyspark-smnb.sh
 ${BIN_DIR}/mount-efs-accesspoint.sh fsid,fsapid,mountpoint
 
 # These require jupyter lab restarted and browser reloaded, to see the changes.
