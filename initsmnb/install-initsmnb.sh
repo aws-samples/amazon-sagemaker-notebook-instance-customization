@@ -67,6 +67,7 @@ declare -a SCRIPTS=(
     init-vim.sh
     install-cdk.sh
     QUICKSTART-CDK.md
+    fix-pyspark-smnb.sh
     mount-efs-accesspoint.sh
     patch-jupyter-config.sh
     change-jlab-ui.sh
