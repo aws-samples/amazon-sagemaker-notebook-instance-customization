@@ -51,6 +51,7 @@ then
     echo "Installing node.js and npm..."
     nvm install --lts
     nvm use --lts
+    npm install -g npm
 fi
 node -e "console.log('Running Node.js ' + process.version)"
 echo "Checking npm:" `npm -v`
