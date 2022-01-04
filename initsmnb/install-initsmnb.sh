@@ -65,8 +65,8 @@ declare -a SCRIPTS=(
     patch-bash-config.sh
     fix-ipython.sh
     init-vim.sh
-    cdk-pre-requisites.sh
-    QUICKSTART-NVM-CDK.md
+    install-cdk.sh
+    QUICKSTART-CDK.md
     mount-efs-accesspoint.sh
     patch-jupyter-config.sh
     change-jlab-ui.sh
