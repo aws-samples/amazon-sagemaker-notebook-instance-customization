@@ -76,6 +76,7 @@ declare -a SCRIPTS=(
     change-docker-data-root.sh
     change-docker-tmp-dir.sh
     restart-docker.sh
+    upgrade-jupyter.sh
 )
 
 declare -a NESTED_FILES=(
@@ -87,6 +88,9 @@ CURL_OPTS="--fail-early -fL"
 FROM_LOCAL=0
 GIT_USER=''
 GIT_EMAIL=''
+ENABLE_EXPERIMENTAL=0
+ADVENTUROUS=0
+
 declare -a EFS=()
 
 declare -a HELP=(
@@ -95,6 +99,8 @@ declare -a HELP=(
     "[--git-user 'First Last']"
     "[--git-email me@abc.def]"
     "[--efs 'fsid,fsap,mp' [--efs ...]]"
+    "[--enable-experimental]"
+    "[--adventurous]"
 )
 
 ################################################################################
@@ -130,6 +136,15 @@ parse_args() {
         --efs)
             [[ "$2" != "" ]] && EFS+=("$2")
             shift 2
+            ;;
+        --enable-experimental)
+            ENABLE_EXPERIMENTAL=1
+            shift
+            ;;
+        --adventurous)
+            ENABLE_EXPERIMENTAL=1
+            ADVENTUROUS=1
+            shift
             ;;
         *)
             error_and_exit "Unknown argument: $key"
@@ -212,6 +227,8 @@ sed \
     -e "s/Firstname Lastname/$GIT_USER/" \
     -e "s/first.last@email.abc/$GIT_EMAIL/" \
     -e "s/fsid,fsapid,mountpoint/$(efs2str ' ')/" \
+    -e "s/^ENABLE_EXPERIMENTAL=0/ENABLE_EXPERIMENTAL=$ENABLE_EXPERIMENTAL/" \
+    -e "s/^ADVENTUROUS=0$/ADVENTUROUS=$ADVENTUROUS/" \
     TEMPLATE-setup-my-sagemaker.sh >> setup-my-sagemaker.sh
 chmod ugo+x setup-my-sagemaker.sh
 
