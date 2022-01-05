@@ -44,6 +44,7 @@ done
 # Upgrade jlab & extensions
 declare -a PKGS=(
     notebook
+    ipykernel
     jupyterlab
     jupyter-server-proxy
 
@@ -62,6 +63,10 @@ declare -a PKGS=(
     isort
 )
 $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
+
+# Same behavior as stock notebook instance: no JupyterSystemEnv kernel "Python3 (ipykernel)"
+[[ -f ~/anaconda3/envs/JupyterSystemEnv/share/jupyter/kernels/python3/kernel.json ]] \
+    && rm ~/anaconda3/envs/JupyterSystemEnv/share/jupyter/kernels/python3/kernel.json
 
 
 ################################################################################
@@ -163,16 +168,32 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/palette.jupyterlab-settings
 EOF
 
 # Auto-apply black & isort when saving on notebook editor (but sadly, not on text editor).
-mkdir -p $JUPYTER_CONFIG_ROOT/jupyterlab_code_formatter-extension/
-cat << EOF > $JUPYTER_CONFIG_ROOT/jupyterlab_code_formatter-extension/settings.jupyterlab-settings
+mkdir -p $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/
+cat << EOF > $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/settings.jupyterlab-settings
 {
     // Jupyterlab Code Formatter
     // @ryantam626/jupyterlab_code_formatter:settings
     // Jupyterlab Code Formatter settings.
     // **********************************************
 
+    // Black Config
+    // Config to be passed into black's format_str function call.
+    "black": {
+        "line_length": 100
+    },
+
     // Auto format config
     // Auto format code when save the notebook.
     "formatOnSave": true,
+
+    // Isort Config
+    // Config to be passed into isort's SortImports function call.
+    "isort": {
+        "multi_line_output": 3,
+        "include_trailing_comma": true,
+        "force_grid_wrap": 0,
+        "use_parentheses": true,
+        "line_length": 100
+    }
 }
 EOF
