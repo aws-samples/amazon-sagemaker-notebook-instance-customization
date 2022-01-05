@@ -64,13 +64,20 @@ declare -a PKGS=(
 )
 $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
 
-# Same behavior as stock notebook instance: no JupyterSystemEnv kernel "Python3 (ipykernel)"
+
+################################################################################
+# STEP-01: Maintain same behavior as stock notebook instance
+################################################################################
+# No JupyterSystemEnv kernel "Python3 (ipykernel)"
 [[ -f ~/anaconda3/envs/JupyterSystemEnv/share/jupyter/kernels/python3/kernel.json ]] \
     && rm ~/anaconda3/envs/JupyterSystemEnv/share/jupyter/kernels/python3/kernel.json
 
+# No trash
+echo "c.FileContentsManager.delete_to_trash = False" >> ~/.jupyter/jupyter_notebook_config.py
+
 
 ################################################################################
-# STEP-01: Apply jlab-3+ configs
+# STEP-02: Apply jlab-3+ configs
 ################################################################################
 JUPYTER_CONFIG_ROOT=~/.jupyter/lab/user-settings/\@jupyterlab
 
