@@ -43,6 +43,7 @@ done
 
 # Upgrade jlab & extensions
 declare -a PKGS=(
+    ipython
     notebook
     ipykernel
     jupyterlab
