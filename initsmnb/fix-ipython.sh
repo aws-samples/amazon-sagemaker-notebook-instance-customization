@@ -11,6 +11,8 @@ from pygments.token import Name
 
 c.TerminalInteractiveShell.highlighting_style_overrides = {
     Name.Variable: "#B8860B",
+    Name.Variable.Magic: "#B8860B",   # Unclear why certain ipython prefers this
+    Name.Function: "#6fa8dc",         # For IPython 8+ (tone down dark blue for function name)
 }
 EOF
 
