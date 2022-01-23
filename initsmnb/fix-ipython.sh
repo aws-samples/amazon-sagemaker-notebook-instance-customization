@@ -5,8 +5,20 @@ echo "Change ipython color scheme on something.__class__ from dark blue (nearly 
 mkdir -p ~/.ipython/profile_default/
 
 cat << EOF >> ~/.ipython/profile_default/ipython_config.py
-c.TerminalInteractiveShell.highlight_matching_brackets = True
+# See: https://stackoverflow.com/a/48455387
 
+"""
+Change default dark blue for "object.__file__" to a more readable color, esp. on dark background.
+
+Find out the correct token type with:
+
+>>> from pygments.lexers import PythonLexer
+>>> list(PythonLexer().get_tokens('os.__class__'))
+[(Token.Name, 'os'),
+ (Token.Operator, '.'),
+ (Token.Name.Variable.Magic, '__class__'),
+ (Token.Text, '\n')]
+"""
 from pygments.token import Name
 
 c.TerminalInteractiveShell.highlighting_style_overrides = {
@@ -14,6 +26,8 @@ c.TerminalInteractiveShell.highlighting_style_overrides = {
     Name.Variable.Magic: "#B8860B",   # Unclear why certain ipython prefers this
     Name.Function: "#6fa8dc",         # For IPython 8+ (tone down dark blue for function name)
 }
+
+c.TerminalInteractiveShell.highlight_matching_brackets = True
 EOF
 
 
