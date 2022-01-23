@@ -38,12 +38,12 @@ dark blue compared to older versions. Quick test with the following:
 
 >>> import asdf
 
-Unfortunately, `IPython.core.ultratb.VerboseTB.get_records()` hardcoded the
+Unfortunately, `IPython.core.ultratb.VerboseTB.get_records()` hardcodes the
 "default" pygments style, and doesn't seem to provide a way to override unlike
 what Input provides. Hence, let's directly override pygments.
 """
 from pygments.styles.default import DefaultStyle
-DefaultStyle.styles = {k: v.replace("#0000FF", "#6fa8dc") for k, v in DefaultStyle.styles.items()}
+DefaultStyle.styles = {k: v.replace("#0000FF", "#3d85c6") for k, v in DefaultStyle.styles.items()}
 EOF
 
 
