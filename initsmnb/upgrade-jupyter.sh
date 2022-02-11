@@ -63,6 +63,7 @@ declare -a PKGS=(
     black
     isort
 )
+$BIN_DIR/pip install --no-cache-dir --upgrade pip  # Let us welcome colorful pip.
 $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
 
 
@@ -175,7 +176,8 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/palette.jupyterlab-settings
 }
 EOF
 
-# Auto-apply black & isort when saving on notebook editor (but sadly, not on text editor).
+# Linter for notebook editors and code editors. Do not autosave, because it's broken
+# on multi-line '!some_command \'.
 mkdir -p $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/
 cat << EOF > $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/settings.jupyterlab-settings
 {
@@ -192,7 +194,7 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/sett
 
     // Auto format config
     // Auto format code when save the notebook.
-    "formatOnSave": true,
+    "formatOnSave": false,
 
     // Isort Config
     // Config to be passed into isort's SortImports function call.
@@ -203,5 +205,47 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/sett
         "use_parentheses": true,
         "line_length": 100
     }
+}
+EOF
+
+# Shortcuts to format notebooks or codes with black and isort.
+mkdir -p $JUPYTER_CONFIG_ROOT/shortcuts-extension
+cat << EOF > $JUPYTER_CONFIG_ROOT/shortcuts-extension/shortcuts.jupyterlab-settings
+{
+    // Keyboard Shortcuts
+    // @jupyterlab/shortcuts-extension:shortcuts
+    // Keyboard shortcut settings.
+    // *****************************************
+
+    "shortcuts": [
+        {
+            "command": "jupyterlab_code_formatter:black",
+            "keys": [
+                "Ctrl Shift B"
+            ],
+            "selector": ".jp-Notebook.jp-mod-editMode"
+        },
+        {
+            "command": "jupyterlab_code_formatter:black",
+            "keys": [
+                "Ctrl Shift B"
+            ],
+            "selector": ".jp-CodeMirrorEditor"
+        },
+        {
+            "command": "jupyterlab_code_formatter:isort",
+            "keys": [
+                "Ctrl Shift I"
+            ],
+            "selector": ".jp-Notebook.jp-mod-editMode"
+        },
+        {
+            "command": "jupyterlab_code_formatter:isort",
+            "keys": [
+                "Ctrl Shift I"
+            ],
+            "selector": ".jp-CodeMirrorEditor"
+        }
+    ]
 }
 EOF
