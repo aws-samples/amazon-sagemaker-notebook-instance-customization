@@ -41,7 +41,9 @@ declare -a PKG=(
     jupytext
     s4cmd
     black
-    black-nb
+    nbqa
+    isort
+    pyupgrade
 )
 
 for i in "${PKG[@]}"; do
