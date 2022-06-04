@@ -60,9 +60,9 @@ your notebook instance enables
     `~/SageMaker/` has enough space to hold docker images, docker containers, and docker temp files.
 
 - Jupyter Lab:
-  - **\[Need sudo & internet\]** Use the newest release of Jupyter Lab, with advance customizations.
-    See [here](#54-advance-jupyter-lab-tweaks) for details, and how choose to stay with the stock
-    Jupyter Lab from the notebook instance.
+  - **\[Need sudo & internet\]** Use the newest release of Jupyter Lab (3.x or newer), with advance
+    customizations. See [here](#54-advance-jupyter-lab-tweaks) for details, and how choose to stay
+    with the stock Jupyter Lab from the notebook instance.
   - **\[Need sudo\]** In addition to SageMaker's built-in conda environments, Jupyter Lab to also
     auto-scan `/home/ec2-user/SageMaker/envs/` for custom conda environments.
 
