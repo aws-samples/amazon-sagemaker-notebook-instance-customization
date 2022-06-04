@@ -88,8 +88,8 @@ CURL_OPTS="--fail-early -fL"
 FROM_LOCAL=0
 GIT_USER=''
 GIT_EMAIL=''
-ENABLE_EXPERIMENTAL=0
-ADVENTUROUS=0
+CONFIG_DOCKER=1
+PLAIN_OLD_JLAB=0
 
 declare -a EFS=()
 
@@ -99,8 +99,8 @@ declare -a HELP=(
     "[--git-user 'First Last']"
     "[--git-email me@abc.def]"
     "[--efs 'fsid,fsap,mp' [--efs ...]]"
-    "[--enable-experimental]"
-    "[--adventurous]"
+    "[--no-config-docker]"
+    "[--plain-old-jlab]"
 )
 
 ################################################################################
@@ -137,13 +137,12 @@ parse_args() {
             [[ "$2" != "" ]] && EFS+=("$2")
             shift 2
             ;;
-        --enable-experimental)
-            ENABLE_EXPERIMENTAL=1
+        --no-config-docker)
+            CONFIG_DOCKER=0
             shift
             ;;
-        --adventurous)
-            ENABLE_EXPERIMENTAL=1
-            ADVENTUROUS=1
+        --plain-old-jlab)
+            PLAIN_OLD_JLAB=1
             shift
             ;;
         *)
@@ -227,8 +226,8 @@ sed \
     -e "s/Firstname Lastname/$GIT_USER/" \
     -e "s/first.last@email.abc/$GIT_EMAIL/" \
     -e "s/fsid,fsapid,mountpoint/$(efs2str ' ')/" \
-    -e "s/^ENABLE_EXPERIMENTAL=0/ENABLE_EXPERIMENTAL=$ENABLE_EXPERIMENTAL/" \
-    -e "s/^ADVENTUROUS=0$/ADVENTUROUS=$ADVENTUROUS/" \
+    -e "s/^CONFIG_DOCKER=1/CONFIG_DOCKER=$CONFIG_DOCKER/" \
+    -e "s/^PLAIN_OLD_JLAB=0$/PLAIN_OLD_JLAB=$PLAIN_OLD_JLAB/" \
     TEMPLATE-setup-my-sagemaker.sh >> setup-my-sagemaker.sh
 chmod ugo+x setup-my-sagemaker.sh
 
