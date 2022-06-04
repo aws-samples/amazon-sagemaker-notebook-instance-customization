@@ -11,13 +11,14 @@ Table of contents:
 - [5. Appendix](#5-appendix)
   - [5.1. Restart JupyterLab](#51-restart-jupyterlab)
   - [5.2. Change terminal font size](#52-change-terminal-font-size)
-  - [5.3. Experimental Tweaks](#53-experimental-tweaks)
+  - [5.3. Docker Tweaks](#53-docker-tweaks)
+  - [5.4. Advance Jupyter Lab Tweaks](#54-advance-jupyter-lab-tweaks)
 - [6. Related Projects](#6-related-projects)
 - [7. Security](#7-security)
 - [8. License](#8-license)
 - [9. Acknowledgements](#9-acknowledgements)
 
-# 1. Overview
+## 1. Overview
 
 This repo contains scripts to re-run common tweaks on a fresh (i.e., newly
 created or rebooted) SageMaker **classic** notebook instance, to make the
@@ -46,16 +47,22 @@ more sophisticated automation tools or services.
 
 We hope that you find this repo useful to adopt into your daily work habits.
 
-# 2. Non-exhaustive list of customizations
+## 2. Non-exhaustive list of customizations
 
 Please note that tweaks marked with **\[Need sudo\]** can only be in-effect when
 your notebook instance enables
 [root access for notebook users](https://aws.amazon.com/blogs/machine-learning/control-root-access-to-amazon-sagemaker-notebook-instances/), and
 **\[Need internet\]** requires internet connection.
 
+- **\[Need sudo\]** Docker: enable SageMaker local mode, and advance docker customizations. See
+  [here](#53-docker-tweaks) for details, and how to disable.
+  - Please note that you may need to increase your notebook instance's EBS to make sure that the
+    `~/SageMaker/` has enough space to hold docker images, docker containers, and docker temp files.
+
 - Jupyter Lab:
-  - Reduce font size on Jupyter Lab, and show line numbers on editors.
-  - **\[Need sudo\]** Terminal defaults to `bash` shell, dark theme, and smaller font.
+  - **\[Need sudo\]** Use the newest release of Jupyter Lab, with advance customizations. See
+    [here](#54-advance-jupyter-lab-tweaks) for details, and how choose to stay with the stock
+    Jupyter Lab from the notebook instance.
   - **\[Need sudo\]** In addition to SageMaker's built-in conda environments, Jupyter Lab to also
     auto-scan `/home/ec2-user/SageMaker/envs/` for custom conda environments.
 
@@ -68,6 +75,8 @@ your notebook instance enables
     environment must have `ipykernel` package installed. Once the environment is created, you may
     need to [restart JupyterLab](#appendix-restart-jupyterlab) before you can see the environment
     listed as one of the kernels.
+  - Reduce font size on Jupyter Lab, and show line numbers on editors.
+  - **\[Need sudo\]** Terminal defaults to `bash` shell, dark theme, and smaller font.
 
 - Git:
   - Optionally change committer's name and email, which defaults to `ec2-user`
@@ -85,7 +94,8 @@ your notebook instance enables
     [s4cmd](https://github.com/bloomreach/s4cmd),
     [black-nb](https://github.com/tomcatling/black-nb),
     [black](https://github.com/psf/black),
-    [jupytext](https://github.com/mwouts/jupytext)
+    [jupytext](https://github.com/mwouts/jupytext), and
+    [AWS CDK CLI](https://docs.aws.amazon.com/cdk/v2/guide/home.html).
     - `pre-commit` caches of hook repositories survive reboots
     - `ranger` is configured to use relative line numbers
     - Whenever possible, commands are installed to the persistent area under
@@ -111,7 +121,7 @@ your notebook instance enables
 
 - [Experimental tweaks](#53-experimental-tweaks) (off by default)
 
-# 3. Installation
+## 3. Installation
 
 This step needs to be done **once** on a newly *created* notebook instance.
 
@@ -122,7 +132,7 @@ instance has the necessary network access to this repo.
 Another choice is to bootstrap this repo into your SageMaker classic notebook
 instance, then invoke the install script in its local mode.
 
-## 3.1. Installation from github
+### 3.1. Installation from github
 
 Go to the Jupyter Lab on your SageMaker notebook instance. Open a terminal,
 then run this command:
@@ -157,7 +167,7 @@ be mounted as `/home/ec2-user/mnt/my_efs_02/`.
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
 Your next step is to jump to section [Usage](#14-usage).
 
-## 3.2. Installation from local source
+### 3.2. Installation from local source
 
 On your SageMaker notebook instance, open a terminal and run these commands:
 
@@ -171,7 +181,7 @@ cd amazon-sagemaker-notebook-instance-customization/initsmnb
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
 Your next step is to jump to section [Usage](#14-usage).
 
-# 4. Usage
+## 4. Usage
 
 Once installed, you should see file `/home/ec2-user/SageMaker/initsmnb/setup-my-sagemaker.sh`.
 
@@ -184,9 +194,9 @@ Due to how SageMaker notebook works, please re-run `setup-my-sagemaker.sh` on a
 newly *started* or *restarted* instance. You may even consider to automate this
 step using SageMaker lifecycle config.
 
-# 5. Appendix
+## 5. Appendix
 
-## 5.1. Restart JupyterLab
+### 5.1. Restart JupyterLab
 
 On the Jupyter Lab's terminal, run this command:
 
@@ -203,7 +213,7 @@ is expected.
 
 Then, reload your browser tab, and enjoy the new experience.
 
-## 5.2. Change terminal font size
+### 5.2. Change terminal font size
 
 To change the terminal font size, after installation
 
@@ -211,38 +221,53 @@ To change the terminal font size, after installation
 2. go to the section that customizes the terminal,
 3. then change the fontsize (default is 10) to another value of your choice.
 
-## 5.3. Experimental Tweaks
+### 5.3. Docker Tweaks
 
-Advance users may want to explore and enable the experimental tweaks. These are off by default, and
-must be enabled by modifying `~/SageMaker/initsmnb/setup-my-sagemaker.sh` to set
-`ENABLE_EXPERIMENTAL=1`. Please refers to the script itself to find out the details of the tweaks.
+- Enable SageMaker local mode.
 
-Presently, these are the experimental tweaks:
-
-- disable the git extension for Jupyter Lab. This is aimed for power users who primarily use git
-  from CLI, and do not want to be distracted by Jupyter Lab's frequent refreshes on the lower-left
-  status bar.
-
-- enable SageMaker local mode.
-
-- centralize notebook checkpoints to `/tmp/.ipynb_checkpoints/`. This prevents
-  `.ipynb_checkpoints/` from making its way into the tarballs generated by
-  SageMaker SDK for training, inference, and framework processing scripts, and
-  model repack.
-
-- relocate docker's data-root to persistent area `~/SageMaker/.initsmnb.d/docker/`, so that after
+- Relocate docker's data-root to persistent area `~/SageMaker/.initsmnb.d/docker/`, so that after
   reboot, your `docker images` won't show empty images anymore (provided you've docker build or pull
   before).
 
-- relocate docker's tmpdir to persistent area `~/SageMaker/.initsmnb.d/tmp/`, so that you can build
+- Relocate docker's tmpdir to persistent area `~/SageMaker/.initsmnb.d/tmp/`, so that you can build
   large custom images that require more space than what `/tmp` (i.e., on root volume) provides.
 
-  - a secondary benefit is to allow SageMaker local mode to run with S3 input that's larger than
+  - A secondary benefit is to allow SageMaker local mode to run with S3 input that's larger than
     what `/tmp` (i.e., on root volume) provides. Please note SageMaker local mode will copy the
     S3 input to the docker's tmpdir, but upon completion the SDK won't remove the tmp dir. Hence,
     you need to manually remove the temporary S3 inputs from the persistent docker's tmpdir.
 
-# 6. Related Projects
+Should you choose not to apply the docker tweaks, make sure to pass `--no-config-docker` to the
+`install-initsmnb.sh` script.
+
+### 5.4. Advance Jupyter Lab Tweaks
+
+- Upgrade to the latest release of Jupyter Lab.
+
+- Enable code formatting (thanks to
+  [jupyterlab-code-formatter](https://github.com/ryantam626/jupyterlab_code_formatter)),
+  [black](https://github.com/psf/black), and [isort](https://github.com/PyCQA/isort).
+
+  - Press `ctrl-shift-b` to reformat a notebook or text editor with `black`.
+  - Press `ctrl-shift-i` to reformat a notebook or text editor with `isort`.
+  - To apply `black` + `isort` at the same time to a notebook, you can also click a button on the
+    toolbar as shown
+    [here](https://ryantam626.github.io/jupyterlab_code_formatter/usage.html#for-the-entire-document).
+
+- Centralize notebook checkpoints to `/tmp/.ipynb_checkpoints/`. This prevents
+  `.ipynb_checkpoints/` from making its way into the tarballs generated by
+  SageMaker SDK for training, inference, and framework processing scripts, and
+  model repack.
+
+- Disable the git extension for Jupyter Lab. This is aimed for power users who primarily use git
+  from CLI, and do not want to be distracted by Jupyter Lab's frequent refreshes on the lower-left
+  status bar.
+
+Should you choose not to apply these advance JLab tweaks (hence, continue to use the JLab version
+provided by the notebook instance), make sure to pass `--plain-old-jlab` to the
+`install-initsmnb.sh` script.
+
+## 6. Related Projects
 
 Once you've customized your development environment on your SageMaker classic
 notebook instance, we invite you to explore related samples.
@@ -276,15 +301,15 @@ notebook instance, we invite you to explore related samples.
    hosts a simple template to set up basic Vim, Tmux, Zsh for the Deep Learning
    AMI Amazon Linux 2 for data scientists.
 
-# 7. Security
+## 7. Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
-# 8. License
+## 8. License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
 
-# 9. Acknowledgements
+## 9. Acknowledgements
 
 [@yapweiyih](https://github.com/yapweiyih) (EFS, Streamlit), [@josiahdavis](https://github.com/josiahdavis) and [@kianho](https://github.com/kianho) (vim), [@theoldfather](https://github.com/theoldfather) (docker relocation), [@aws/amazon-sagemaker-examples](https://github.com/aws/amazon-sagemaker-examples) (SageMaker local mode), [@yinsong1986](https://github.com/yinsong1986) (persistent custom conda environment), [@verdimrc](https://github.com/verdimrc) (misc.), the originator of git lol & lola (earlier traceable could be this
 [blog](http://blog.kfish.org/2010/04/git-lola.html).
