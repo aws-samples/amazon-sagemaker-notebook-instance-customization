@@ -54,14 +54,14 @@ your notebook instance enables
 [root access for notebook users](https://aws.amazon.com/blogs/machine-learning/control-root-access-to-amazon-sagemaker-notebook-instances/), and
 **\[Need internet\]** requires internet connection.
 
-- **\[Need sudo\]** Docker: enable SageMaker local mode, and advance docker customizations. See
-  [here](#53-docker-tweaks) for details, and how to disable.
+- **\[Need sudo & internet\]** Docker: enable SageMaker local mode, and advance docker customizations.
+  See [here](#53-docker-tweaks) for details, and how to disable.
   - Please note that you may need to increase your notebook instance's EBS to make sure that the
     `~/SageMaker/` has enough space to hold docker images, docker containers, and docker temp files.
 
 - Jupyter Lab:
-  - **\[Need sudo\]** Use the newest release of Jupyter Lab, with advance customizations. See
-    [here](#54-advance-jupyter-lab-tweaks) for details, and how choose to stay with the stock
+  - **\[Need sudo & internet\]** Use the newest release of Jupyter Lab, with advance customizations.
+    See [here](#54-advance-jupyter-lab-tweaks) for details, and how choose to stay with the stock
     Jupyter Lab from the notebook instance.
   - **\[Need sudo\]** In addition to SageMaker's built-in conda environments, Jupyter Lab to also
     auto-scan `/home/ec2-user/SageMaker/envs/` for custom conda environments.
