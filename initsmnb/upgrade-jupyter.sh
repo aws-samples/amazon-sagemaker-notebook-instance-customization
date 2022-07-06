@@ -45,6 +45,7 @@ done
 declare -a PKGS=(
     ipython
     notebook
+    "nbclassic!=0.4.0"   # https://github.com/jupyter/nbclassic/issues/121
     ipykernel
     jupyterlab
     jupyter-server-proxy
