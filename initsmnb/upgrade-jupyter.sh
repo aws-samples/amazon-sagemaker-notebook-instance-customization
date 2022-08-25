@@ -58,6 +58,7 @@ declare -a PKGS=(
     jupyter_bokeh
     nbdime
     jupyterlab-execute-time
+    jupyterlab-skip-traceback
 
     # jupyterlab_code_formatter requires formatters in its venv.
     # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/153
