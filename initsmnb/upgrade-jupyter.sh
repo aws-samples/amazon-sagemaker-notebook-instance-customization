@@ -78,6 +78,7 @@ $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
 
 # No trash
 echo "c.FileContentsManager.delete_to_trash = False" >> ~/.jupyter/jupyter_notebook_config.py
+echo "c.FileContentsManager.delete_to_trash = False" >> ~/.jupyter/jupyter_server_config.py
 
 
 ################################################################################

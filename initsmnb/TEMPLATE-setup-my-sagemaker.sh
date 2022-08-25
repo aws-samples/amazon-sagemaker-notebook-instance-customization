@@ -66,6 +66,8 @@ if [[ $PLAIN_OLD_JLAB == 0 ]]; then
     # for training scripts, framework processing scripts, and model repack.
     echo "c.FileCheckpoints.checkpoint_dir = '/tmp/.ipynb_checkpoints'" \
         >> ~/.jupyter/jupyter_notebook_config.py
+    echo "c.FileCheckpoints.checkpoint_dir = '/tmp/.ipynb_checkpoints'" \
+        >> ~/.jupyter/jupyter_server_config.py
 
     ${BIN_DIR}/upgrade-jupyter.sh
 fi
