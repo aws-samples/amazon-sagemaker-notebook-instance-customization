@@ -69,6 +69,9 @@ declare -a PKGS=(
 $BIN_DIR/pip install --no-cache-dir --upgrade pip  # Let us welcome colorful pip.
 $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
 
+# See https://github.com/Cadair/jupyter_environment_kernels/pull/41
+$BIN_DIR/pip install --no-cache-dir --force 'git+https://github.com/verdimrc/jupyter_environment_kernels.git@master#egg=environment_kernels'
+
 
 ################################################################################
 # STEP-01: Maintain same behavior as stock notebook instance
