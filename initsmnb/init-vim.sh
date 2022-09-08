@@ -81,7 +81,7 @@ match RedundantSpaces /\s\+$/
 
 " Terminado supports 256 colors
 set t_Co=256
-colorscheme delek
+"colorscheme delek
 "colorscheme elflord
 "colorscheme murphy
 "colorscheme ron
