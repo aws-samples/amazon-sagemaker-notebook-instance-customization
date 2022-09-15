@@ -281,3 +281,19 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/shortcuts-extension/shortcuts.jupyterlab-setti
     ]
 }
 EOF
+
+# Default to the advanced json editor to edit the settings.
+# Since v3.4.x; https://github.com/jupyterlab/jupyterlab/pull/12466
+mkdir -p $JUPYTER_CONFIG_ROOT/settingeditor-extension
+cat << EOF > $JUPYTER_CONFIG_ROOT/settingeditor-extension/form-ui.jupyterlab-settings
+{
+    // Settings Editor Form UI
+    // @jupyterlab/settingeditor-extension:form-ui
+    // Settings editor form ui settings.
+    // *******************************************
+
+    // Type of editor for the setting.
+    // Set the type of editor to use while editing your settings.
+    "settingEditorType": "json"
+}
+EOF
