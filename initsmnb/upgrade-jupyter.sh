@@ -34,12 +34,18 @@ declare -a EXTS_TO_DEL=(
     jupyterlab-toc
     jupyterlab-git
     nbdime-jupyterlab
-
-    sagemaker_examples  # Won't work on jlab-3.x anyway.
 )
 for i in "${EXTS_TO_DEL[@]}"; do
     rm $CONDA_ENV_DIR/share/jupyter/lab/extensions/$i-*.tgz
 done
+
+# Do whatever it takes to prevent JLab pop-up "Build recommended..."
+$BIN_DIR/jupyter lab clean
+cp $CONDA_ENV_DIR/share/jupyter/lab/static/package.json{,.ori}
+cat $CONDA_ENV_DIR/share/jupyter/lab/static/package.json.ori \
+  | jq 'del(.dependencies."@jupyterlab/git", .jupyterlab.extensions."@jupyterlab/git", .jupyterlab.extensionMetadata."@jupyterlab/git")' \
+  > $CONDA_ENV_DIR/share/jupyter/lab/static/package.json
+
 
 # Upgrade jlab & extensions
 declare -a PKGS=(
