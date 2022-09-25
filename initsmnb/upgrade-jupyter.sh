@@ -65,6 +65,7 @@ declare -a PKGS=(
     nbdime
     jupyterlab-execute-time
     jupyterlab-skip-traceback
+    jupyterlab-unfold
 
     # jupyterlab_code_formatter requires formatters in its venv.
     # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/153
