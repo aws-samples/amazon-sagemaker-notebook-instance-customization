@@ -11,7 +11,8 @@ Table of contents:
 - [5. Appendix](#5-appendix)
   - [5.1. Restart JupyterLab](#51-restart-jupyterlab)
   - [5.2. Change terminal font size](#52-change-terminal-font-size)
-  - [5.3. Advance Jupyter Lab Tweaks](#53-advance-jupyter-lab-tweaks)
+  - [5.3. Docker Tweaks](#53-docker-tweaks)
+  - [5.4. Advance Jupyter Lab Tweaks](#54-advance-jupyter-lab-tweaks)
 - [6. Related Projects](#6-related-projects)
 - [7. Security](#7-security)
 - [8. License](#8-license)
@@ -60,7 +61,7 @@ your notebook instance enables
 
 - Jupyter Lab:
   - **\[Need sudo & internet\]** Use the newest release of Jupyter Lab (3.x or newer), with advance
-    customizations. See [here](#53-advance-jupyter-lab-tweaks) for details, and how choose to stay
+    customizations. See [here](#54-advance-jupyter-lab-tweaks) for details, and how choose to stay
     with the stock Jupyter Lab from the notebook instance.
   - **\[Need sudo\]** In addition to SageMaker's built-in conda environments, Jupyter Lab to also
     auto-scan `/home/ec2-user/SageMaker/envs/` for custom conda environments.
