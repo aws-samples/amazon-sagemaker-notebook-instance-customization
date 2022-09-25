@@ -9,15 +9,6 @@ cat << 'EOF' >> ~/.bashrc
 export NVM_DIR=$HOME/SageMaker/.initsmnb.d/.nvm
 [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"  # Loads nvm
 [[ -s "$NVM_DIR/bash_completion" ]] && . "$NVM_DIR/bash_completion"  # Loads nvm bash_completion
-
-# To bootstrap CDK to the account ID associated with the current credential.
-# You may want to change to specific account ID instead.
-export CDK_DEFAULT_ACCOUNT=$(aws sts get-caller-identity | grep Account | awk '{print $2}' | sed -e 's/"//g' -e 's/,//g')
-
-# To deploy a CDK stack to the region where the current EC2 or notebook instance is running.
-# You may want to change to specific region instead.
-export EC2_AVAIL_ZONE=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
-export CDK_DEFAULT_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed 's/[a-z]\$//'`"
 EOF
 
 
