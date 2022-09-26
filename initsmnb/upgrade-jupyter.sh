@@ -66,6 +66,7 @@ declare -a PKGS=(
     jupyterlab-execute-time
     jupyterlab-skip-traceback
     jupyterlab-unfold
+    stickyland
 
     # jupyterlab_code_formatter requires formatters in its venv.
     # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/153
@@ -81,19 +82,21 @@ $BIN_DIR/pip install --no-cache-dir --force 'git+https://github.com/verdimrc/jup
 
 
 ################################################################################
-# STEP-01: Maintain same behavior as stock notebook instance
+# STEP-01: Start-up settings
 ################################################################################
-# No JupyterSystemEnv kernel "Python3 (ipykernel)"
+# No JupyterSystemEnv's "Python3 (ipykernel)", same as stock notebook instance
 [[ -f ~/anaconda3/envs/JupyterSystemEnv/share/jupyter/kernels/python3/kernel.json ]] \
     && rm ~/anaconda3/envs/JupyterSystemEnv/share/jupyter/kernels/python3/kernel.json
 
-# No trash
-echo "c.FileContentsManager.delete_to_trash = False" >> ~/.jupyter/jupyter_notebook_config.py
-echo "c.FileContentsManager.delete_to_trash = False" >> ~/.jupyter/jupyter_server_config.py
+# File operations
+for i in ~/.jupyter/jupyter_{notebook,server}_config.py; do
+    echo "c.FileContentsManager.delete_to_trash = False" >> $i
+    echo "c.FileContentsManager.always_delete_dir = True" >> $i
+done
 
 
 ################################################################################
-# STEP-02: Apply jlab-3+ configs
+# STEP-02: Apply jlab-3+ UI configs
 ################################################################################
 JUPYTER_CONFIG_ROOT=~/.jupyter/lab/user-settings/\@jupyterlab
 

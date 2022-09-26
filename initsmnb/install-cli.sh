@@ -40,10 +40,10 @@ declare -a PKG=(
     cookiecutter
     jupytext
     s4cmd
-    black
-    nbqa
-    isort
-    pyupgrade
+    #black
+    #nbqa
+    #isort
+    #pyupgrade
 )
 
 for i in "${PKG[@]}"; do
