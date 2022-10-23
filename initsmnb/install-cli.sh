@@ -2,10 +2,10 @@
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 if [[ $FLAVOR == "Amazon Linux 2" ]]; then
+    sudo amazon-linux-extras install -y epel
     # Slow install; hence disabled by default
-    #sudo amazon-linux-extras install -y epel
     #sudo yum install -y tig
-    sudo yum install -y htop tree dstat dos2unix
+    sudo yum install -y htop tree dstat dos2unix ncdu
 else
     sudo yum install -y htop tree dstat dos2unix tig
 fi
