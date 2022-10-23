@@ -361,22 +361,34 @@ show_usage() {
          | sed 's/[\\()]//g' \
          | sed "s/|${SMNB_NAME}\.notebook/.notebook/"
     )
-    echo "################################################################################"
-    echo "# Steps to run Code Server (filename: ~/HOWTO-RUN-CODE-SERVER.txt)"
-    echo "################################################################################"
-    echo "1. Open the terminal and run:"
-    echo
-    echo "       code-server --auth=none --disable-telemetry --disable-update-check"
-    echo
-    echo "2. Then, open a new browser tab and go to:"
-    echo
-    echo "       $SMNB_URL/proxy/8080/"
-    echo "################################################################################"
+
+    cat << EOF
+################################################################################
+# Steps to run Code Server (filename: ~/HOWTO-RUN-CODE-SERVER.txt)
+################################################################################
+1. Open the terminal and run:
+
+       code-server --auth=none --disable-telemetry --disable-update-check
+
+2. Then, open a new browser tab and go to:
+
+       $SMNB_URL/proxy/8080/"
+################################################################################
+EOF
 }
 
 
 install_code_server
 if [[ ! -e ~/.local/share/code-server/_SUCCESS ]]; then
+    echo "Cannot detect ~/.local/share/code-server/_SUCCESS"
+    cat << 'EOF'
+
+Cannot find ~/local/share/code-server/_SUCCESS.
+Installing code-server extensions related to Python-based data science.
+Please be patient, as this may take a few minutes.
+
+EOF
+
     install_ext
     apply_setting
     touch ~/.local/share/code-server/_SUCCESS
