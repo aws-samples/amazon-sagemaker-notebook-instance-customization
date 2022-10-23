@@ -49,6 +49,7 @@ declare -a PKG=(
 for i in "${PKG[@]}"; do
     ~/anaconda3/bin/pipx install $i
 done
+~/anaconda3/bin/pipx upgrade-all $i
 
 # pre-commit cache survives reboot (NOTE: can also set $PRE_COMMIT_HOME)
 mkdir -p ~/SageMaker/.initsmnb.d/.pre-commit.cache
