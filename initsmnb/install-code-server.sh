@@ -380,12 +380,13 @@ EOF
 
 install_code_server
 if [[ ! -e ~/.local/share/code-server/_SUCCESS ]]; then
-    echo "Cannot detect ~/.local/share/code-server/_SUCCESS"
     cat << 'EOF'
 
-Cannot find ~/local/share/code-server/_SUCCESS.
-Installing code-server extensions related to Python-based data science.
-Please be patient, as this may take a few minutes.
+###########################################################################
+# Cannot find ~/local/share/code-server/_SUCCESS.                         #
+# Installing code-server extensions related to Python-based data science. #
+# Please be patient, as this may take a few minutes.                      #
+###########################################################################
 
 EOF
 
