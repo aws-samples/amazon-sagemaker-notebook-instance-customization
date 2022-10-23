@@ -372,7 +372,7 @@ show_usage() {
 
 2. Then, open a new browser tab and go to:
 
-       $SMNB_URL/proxy/8080/"
+       $SMNB_URL/proxy/8080/
 ################################################################################
 EOF
 }
@@ -382,11 +382,20 @@ install_code_server
 if [[ ! -e ~/.local/share/code-server/_SUCCESS ]]; then
     cat << 'EOF'
 
-###########################################################################
-# Cannot find ~/local/share/code-server/_SUCCESS.                         #
-# Installing code-server extensions related to Python-based data science. #
-# Please be patient, as this may take a few minutes.                      #
-###########################################################################
+##############################################################################
+# Cannot find ~/local/share/code-server/_SUCCESS.                            #
+#                                                                            #
+# It seems like this is the first time ever the install-code-server.sh runs  #
+# on this SageMaker notebook instance.                                       #
+#                                                                            #
+# As such, I'm going to install several code-server extensions related to    #
+# Python data science to boost your development experience.                  #
+#                                                                            #
+# Please be patient, as this one-time install may take a few minutes.        #
+#                                                                            #
+# The next time you restart this SageMaker notebook instance, the extensions #
+# will still be available, and you shouldn't see this message anymore.       #
+##############################################################################
 
 EOF
 
