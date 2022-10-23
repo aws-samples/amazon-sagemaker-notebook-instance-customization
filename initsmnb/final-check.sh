@@ -26,13 +26,25 @@ cat << EOF
 # Then, refresh your browser tab, and enjoy the new experience.               #
 EOF
 
+if [[ -e ~/HOWTO-RUN-CODE-SERVER.txt ]]; then
+    cat << 'EOF'
+#                                                                             #
+# --------------------------------------------------------------------------- #
+# NOTES:                                                                      #
+# --------------------------------------------------------------------------- #
+# Please refer to file ~/HOWTO-RUN-CODE-SERVER.txt on how to use code-server  #
+# (i.e., "VS Code in the browser") on this SageMaker notebook instance.       #
+EOF
+
+fi
+
 GIT_VERSION=$(git --version)
 if [[ "$GIT_VERSION" < "git version 2.28" ]]; then
-    cat << EOF
+    cat << 'EOF'
 #                                                                             #
-#-----------------------------------------------------------------------------#
+# --------------------------------------------------------------------------- #
 # NOTES:                                                                      #
-#-----------------------------------------------------------------------------#
+# --------------------------------------------------------------------------- #
 # The git version on this SageMaker classic notebook instance is older than   #
 # version 2.28, hence "git init" will default to branch "master".             #
 #                                                                             #

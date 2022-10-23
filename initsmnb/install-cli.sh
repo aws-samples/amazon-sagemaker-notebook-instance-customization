@@ -2,10 +2,10 @@
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 if [[ $FLAVOR == "Amazon Linux 2" ]]; then
+    sudo amazon-linux-extras install -y epel
     # Slow install; hence disabled by default
-    #sudo amazon-linux-extras install -y epel
     #sudo yum install -y tig
-    sudo yum install -y htop tree dstat dos2unix
+    sudo yum install -y htop tree dstat dos2unix ncdu
 else
     sudo yum install -y htop tree dstat dos2unix tig
 fi
@@ -49,6 +49,7 @@ declare -a PKG=(
 for i in "${PKG[@]}"; do
     ~/anaconda3/bin/pipx install $i
 done
+~/anaconda3/bin/pipx upgrade-all
 
 # pre-commit cache survives reboot (NOTE: can also set $PRE_COMMIT_HOME)
 mkdir -p ~/SageMaker/.initsmnb.d/.pre-commit.cache
