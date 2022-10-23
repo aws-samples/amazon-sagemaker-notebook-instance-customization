@@ -129,7 +129,7 @@ EOF
     // 1. press ctrl+shift+p
     // 2. type or select "Jupyter: Select Interpreter to Start Jupyter Server", then press Enter
     // 3. choose "Python 3.x.x ('JupyterSystemEnv') ~/anaconda3/envs/JupyterSystemEnv/bin/python"
-    "python.defaultInterpreterPath": "/home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/python3",
+    "python.defaultInterpreterPath": "/home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/python",
 
     "terminal.integrated.env.osx": {
         "PYTHONPATH": "${workspaceFolder}/src:${env:PYTHONPATH}"
