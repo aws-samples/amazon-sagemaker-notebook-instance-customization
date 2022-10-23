@@ -362,7 +362,7 @@ show_usage() {
          | sed "s/|${SMNB_NAME}\.notebook/.notebook/"
     )
     echo "################################################################################"
-    echo "# Steps to run Code Server"
+    echo "# Steps to run Code Server (filename: ~/HOWTO-RUN-CODE-SERVER.txt)"
     echo "################################################################################"
     echo "1. Open the terminal and run:"
     echo
