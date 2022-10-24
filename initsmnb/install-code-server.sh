@@ -218,7 +218,7 @@ EOF
     },
     "python.analysis.inlayHints.variableTypes": true,
     "python.analysis.inlayHints.functionReturnTypes": true,
-    "python.languageServer": "jedi",
+    "python.languageServer": "Jedi",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.mypyEnabled": true,
