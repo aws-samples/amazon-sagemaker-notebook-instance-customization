@@ -40,7 +40,7 @@ echo "Checking nvm:" `nvm --version`
 # Install node.js (use lts version as-per CDK recommendation)
 if [[ \
     ( $(detect_cmd node -e "console.log('Running Node.js ' + process.version)") == "not_detected" ) \
-    || ( "$(which node)" == /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/node )
+    || ( "$(which node)" == /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/node ) \
 ]]; then
     echo "Installing node.js and npm..."
     GLIBC_VERSION=$(rpm -q --queryformat '%{version}' glibc)
@@ -54,6 +54,7 @@ if [[ \
     fi
     npm install -g npm
 fi
+
 node -e "console.log('Running Node.js ' + process.version)"
 echo "Checking npm:" `npm -v`
 
