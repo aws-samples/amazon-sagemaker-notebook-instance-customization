@@ -43,8 +43,15 @@ if [[ \
     || ( "$(which node)" == /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/node )
 ]]; then
     echo "Installing node.js and npm..."
-    nvm install --lts
-    nvm use --lts
+    GLIBC_VERSION=$(rpm -q --queryformat '%{version}' glibc)
+    if [[ "$GLIBC_VERSION" > "2.26" ]]; then
+        nvm install --lts
+        nvm use --lts
+    else
+        echo "Old glibc-$GLIBC_VERSION detected. Falling back to node.js v16."
+        nvm install 16
+        nvm use 16
+    fi
     npm install -g npm
 fi
 node -e "console.log('Running Node.js ' + process.version)"
