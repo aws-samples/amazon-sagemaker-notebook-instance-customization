@@ -76,5 +76,10 @@ if [[ $PLAIN_OLD_JLAB == 0 ]]; then
     ${BIN_DIR}/upgrade-jupyter.sh
 fi
 
+${BIN_DIR}/install-code-server.sh
+
+# Improve code-server's UX in dealing with persistent conda environments.
+~/anaconda3/bin/conda config --append envs_dirs ~/SageMaker/envs
+
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
