@@ -7,6 +7,8 @@ if [[ $FLAVOR == "Amazon Linux 2" ]]; then
     # Slow install; hence disabled by default
     #sudo yum update -y
     sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta
+    echo "alias ncdu='ncdu --color dark'" >> ~/.bashrc
+EOF
 else
     sudo yum install -y htop tree dstat dos2unix tig
 fi
