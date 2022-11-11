@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 # Constants
 APP=s5cmd
