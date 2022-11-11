@@ -32,6 +32,8 @@ mkdir -p ~/SageMaker/.initsmnb.d
 mkdir -p ~/.local/bin
 
 ${BIN_DIR}/install-cli.sh
+${BIN_DIR}/duf.sh
+${BIN_DIR}/s5cmd.sh
 ${BIN_DIR}/adjust-sm-git.sh 'Firstname Lastname' first.last@email.abc
 ${BIN_DIR}/fix-osx-keymap.sh
 ${BIN_DIR}/patch-bash-config.sh

@@ -2,13 +2,15 @@
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 if [[ $FLAVOR == "Amazon Linux 2" ]]; then
+    sudo amazon-linux-extras install -y epel
+    sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
     # Slow install; hence disabled by default
-    #sudo amazon-linux-extras install -y epel
-    #sudo yum install -y tig
-    sudo yum install -y htop tree dstat dos2unix
+    #sudo yum update -y
+    sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta
 else
     sudo yum install -y htop tree dstat dos2unix tig
 fi
+sudo yum clean all
 
 ~/anaconda3/bin/nbdime config-git --enable --global
 ln -s ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/.local/bin
@@ -40,6 +42,9 @@ declare -a PKG=(
     cookiecutter
     jupytext
     s4cmd
+    nvitop
+    gpustat
+    awslogs
     #black
     #nbqa
     #isort

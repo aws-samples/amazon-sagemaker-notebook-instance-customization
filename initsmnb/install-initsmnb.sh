@@ -60,6 +60,8 @@ declare -a SCRIPTS=(
     TEMPLATE-setup-my-sagemaker.sh
     ensure-smnb.sh
     install-cli.sh
+    duf.sh
+    s5cmd.sh
     adjust-sm-git.sh
     fix-osx-keymap.sh
     patch-bash-config.sh
