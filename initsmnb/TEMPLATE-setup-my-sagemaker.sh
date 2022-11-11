@@ -81,5 +81,10 @@ ${BIN_DIR}/install-code-server.sh
 # Improve code-server's UX in dealing with persistent conda environments.
 ~/anaconda3/bin/conda config --append envs_dirs ~/SageMaker/envs
 
+# Free up a bit more space on the ephemeral volume
+rm -fr ~/.cache/{pip,yarn}/
+# This operation turns out to be slow...
+#~/anaconda3/condabin/conda clean all -y
+
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
