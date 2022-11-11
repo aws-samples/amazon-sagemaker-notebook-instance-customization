@@ -40,6 +40,18 @@ alias ll='ls -alF --color=auto'
 
 # Better dir color on dark terminal: changed from dark blue to lighter blue
 export LS_COLORS="di=38;5;39"
+
+man() {
+	env \
+		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+		LESS_TERMCAP_md=$(printf "\e[1;31m") \
+		LESS_TERMCAP_me=$(printf "\e[0m") \
+		LESS_TERMCAP_se=$(printf "\e[0m") \
+		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+		LESS_TERMCAP_ue=$(printf "\e[0m") \
+		LESS_TERMCAP_us=$(printf "\e[1;32m") \
+		man "$@"
+}
 EOF
 
 #echo "On a new SageMaker terminal, which uses 'sh' by default, type 'bash -l' (without the quotes)"
