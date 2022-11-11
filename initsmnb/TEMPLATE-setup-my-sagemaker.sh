@@ -84,7 +84,7 @@ ${BIN_DIR}/install-code-server.sh
 # Free up a bit more space on the ephemeral volume
 rm -fr ~/.cache/{pip,yarn}/
 # This operation turns out to be slow...
-#~/anaconda3/condabin/conda clean all -y
+#~/anaconda3/condabin/conda clean --all -y
 
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
