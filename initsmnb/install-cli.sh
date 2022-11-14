@@ -6,7 +6,7 @@ if [[ $FLAVOR == "Amazon Linux 2" ]]; then
     sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
     # Slow install; hence disabled by default
     #sudo yum update -y
-    sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta
+    sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta inxi mediainfo
     echo "alias ncdu='ncdu --color dark'" >> ~/.bashrc
 EOF
 else
