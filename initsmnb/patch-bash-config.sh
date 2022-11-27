@@ -90,6 +90,9 @@ export CDK_DEFAULT_REGION=$REGION
 # SageMaker notebook variables
 export SMNB_NAME=$SMNB_NAME
 export SMNB_URL=$SMNB_URL
+
+# Persistent bash history
+export HISTFILE=/home/ec2-user/SageMaker/.initsmnb.d/.bash_history
 EOF
 
 # Provide reference on how to regenerate the values.
