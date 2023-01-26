@@ -46,6 +46,7 @@ declare -a PKG=(
     nvitop
     gpustat
     awslogs
+    ruff
     #black
     #nbqa
     #isort
