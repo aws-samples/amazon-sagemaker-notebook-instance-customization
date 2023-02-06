@@ -307,3 +307,18 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/settingeditor-extension/form-ui.jupyterlab-set
     "settingEditorType": "json"
 }
 EOF
+
+# Disable fetch Jupyter news (since v3.6.0)
+mkdir -p $JUPYTER_CONFIG_ROOT/settingeditor-extension
+cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/notification..jupyterlab-settings
+{
+    // Notifications
+    // @jupyterlab/apputils-extension:notification
+    // Notifications settings.
+    // *******************************************
+
+    // Fetch official Jupyter news
+    // Whether to fetch news from Jupyter news feed. If `true`, it will make a request to a website.
+    "fetchNews": "false"
+}
+EOF
