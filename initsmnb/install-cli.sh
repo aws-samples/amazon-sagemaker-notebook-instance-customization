@@ -65,3 +65,16 @@ ln -s ~/SageMaker/.initsmnb.d/.pre-commit.cache ~/.cache/pre-commit
 # ranger defaults to relative line number
 mkdir -p ~/.config/ranger/
 echo set line_numbers relative >> ~/.config/ranger/rc.conf
+
+# Catch-up with awscliv2 which has nearly weekly releases.
+wget -O /tmp/awscli2.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+cd /tmp && unzip /tmp/awscli2.zip
+./install --update --install-dir ~/SageMaker/.initsmnb.d/aws-cli-v2 --bin-dir ~/SageMaker/.initsmnb.d/bin
+sudo ln -s ~/SageMaker/.initsmnb.d/bin/aws /usr/local/bin/aws2
+rm /tmp/awscli2.zip
+rm -fr /tmp/aws/
+# Borrow these settings from aws-samples hpc repo
+aws configure set default.s3.max_concurrent_requests 100
+aws configure set default.s3.max_queue_size 10000
+aws configure set default.s3.multipart_threshold 64MB
+aws configure set default.s3.multipart_chunksize 16MB
