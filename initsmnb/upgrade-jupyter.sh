@@ -46,6 +46,25 @@ cat $CONDA_ENV_DIR/share/jupyter/lab/static/package.json.ori \
   | jq 'del(.dependencies."@jupyterlab/git", .jupyterlab.extensions."@jupyterlab/git", .jupyterlab.extensionMetadata."@jupyterlab/git")' \
   > $CONDA_ENV_DIR/share/jupyter/lab/static/package.json
 
+# Silence the warning to build sagemaker extensions (sm-example, sm-session-manager).
+# See: https://jupyterlab.readthedocs.io/en/stable/user/directories.html#disabling-rebuild-checks
+$BIN_DIR/python3 -c 'import json
+from collections import defaultdict
+
+# https://stackoverflow.com/a/8702435
+nested_dict = lambda: defaultdict(nested_dict)
+
+fname = "/home/ec2-user/anaconda3/envs/JupyterSystemEnv/etc/jupyter/jupyter_notebook_config.json"
+with open(fname) as f:
+    d = defaultdict(nested_dict, json.load(f))
+
+d["LabApp"]["tornado_settings"]["page_config_data"].update({"buildCheck": False, "buildAvailable": False})
+
+s = json.dumps(d, indent=2)
+print(s)
+with open(fname, "w") as f:
+    f.write(s)
+'
 
 # Upgrade jlab & extensions
 declare -a PKGS=(
