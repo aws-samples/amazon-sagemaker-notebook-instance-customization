@@ -46,6 +46,20 @@ cat $CONDA_ENV_DIR/share/jupyter/lab/static/package.json.ori \
   | jq 'del(.dependencies."@jupyterlab/git", .jupyterlab.extensions."@jupyterlab/git", .jupyterlab.extensionMetadata."@jupyterlab/git")' \
   > $CONDA_ENV_DIR/share/jupyter/lab/static/package.json
 
+# Also silence JLab pop-up "Build recommended..." due to SageMaker extensions (examples and session agent).
+cat << 'EOF' > ~/.jupyter/jupyter_server_config.json 
+{
+  "LabApp": {
+    "tornado_settings": {
+      "page_config_data": {
+        "buildCheck": false,
+        "buildAvailable": false
+      }
+    }
+  }
+}
+EOF
+
 # Upgrade jlab & extensions
 declare -a PKGS=(
     ipython
