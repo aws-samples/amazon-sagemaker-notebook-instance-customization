@@ -18,14 +18,6 @@ EOF
 }
 
 install_ext() {
-    # WORKAROUND. Remove this once latest code-server works with latest ms-toolsai.jupyter.
-    cat << 'EOF'
-
-# [20221106] Use ms-toolsai.jupyter@2022.8.1002460559, because ms-toolsai.jupyter@2022.10.110 breaks
-# code-server-4.8.{0,1} (but intriguingly, code-server-4.7.1 works just fine).
-EOF
-    code-server --install-extension ms-toolsai.jupyter@2022.8.1002460559
-
     # [20221023] https://github.com/verdimrc/linuxcfg/blob/main/vscode/extensions.json
     #
     # Code-server cannot install some extensions, which is expected.
@@ -34,6 +26,7 @@ EOF
         "adpyke.vscode-sql-formatter"
         "bierner.markdown-mermaid"
         "bungcip.better-toml"
+        "charliermarsh.ruff"
         "christian-kohler.path-intellisense"
         "DavidAnson.vscode-markdownlint"
         "donjayamanne.githistory"
@@ -49,6 +42,7 @@ EOF
         "ms-python.black-formatter"
         # "ms-python.isort"
         "ms-python.python"
+        "ms-toolsai.jupyter"
         "ms-toolsai.vscode-jupyter-powertoys"
         "ms-vscode.live-server"
         # "ms-vscode-remote.remote-ssh"
@@ -58,7 +52,7 @@ EOF
         "shardulm94.trailing-spaces"
         "stkb.rewrap"
         "tomoki1207.pdf"
-        "usernamehw.errorlens"
+        # "usernamehw.errorlens"
         "VisualStudioExptTeam.vscodeintellicode"
         "yzhang.markdown-all-in-one"
     )
@@ -365,8 +359,6 @@ show_usage() {
 
        $SMNB_URL/proxy/8080/
 
-[20221106] Do not upgrade ms-toolsai.jupyter to @2022.10.110 because it breaks
-code-server-4.8.{0,1}.
 ################################################################################
 EOF
 }
