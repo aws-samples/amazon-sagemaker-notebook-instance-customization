@@ -109,6 +109,11 @@ cat << 'EOF' >> ~/.bashrc
 ################################################################################
 #AWS_ACCOUNT=$(aws sts get-caller-identity | grep Account | awk '{print $2}' | sed -e 's/"//g' -e 's/,//g')
 #EC2_AVAIL_ZONE=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+#if [[ $EC2_AVAIL_ZONE == "" ]]; then
+#   # IMDSv2
+#   TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+#   EC2_AVAIL_ZONE=`curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+#fi
 #AWS_DEFAULT_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed 's/[a-z]\$//'`"
 ################################################################################
 
