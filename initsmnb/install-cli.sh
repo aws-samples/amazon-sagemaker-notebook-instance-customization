@@ -76,7 +76,6 @@ echo set line_numbers relative >> ~/.config/ranger/rc.conf
 # Catch-up with awscliv2 which has nearly weekly releases.
 aria2c -x5 --dir /tmp -o awscli2.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
 cd /tmp && unzip -o -q /tmp/awscli2.zip
-cd aws
 aws/install --update --install-dir ~/SageMaker/.initsmnb.d/aws-cli-v2 --bin-dir ~/SageMaker/.initsmnb.d/bin
 sudo ln -s ~/SageMaker/.initsmnb.d/bin/aws /usr/local/bin/aws2 || true
 rm /tmp/awscli2.zip
