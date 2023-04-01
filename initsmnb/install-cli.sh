@@ -9,9 +9,17 @@ sudo rm /etc/yum.repos.d/docker-ce.repo
 if [[ $FLAVOR == "Amazon Linux 2" ]]; then
     sudo amazon-linux-extras install -y epel
     sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
+    sudo yum makecache
 
-    # Feel free to disable yum update if it slows down script's runtime.
-    sudo yum update -y
+    # Disable, it's slow. 180+ packages to update over vanilla SageMaker packages.
+    #sudo yum update -y
+    SM_PKG_TO_UPDATE=$(sudo yum -q check-update 2> /dev/null | wc -l)
+    COLOR_RED="\033[1;31m"
+    COLOR_OFF="\033[0m"
+    echo -e "
+${COLOR_RED}Skip update of ${SM_PKG_TO_UPDATE}+ SageMaker-provided packages because it takes time.
+${COLOR_OFF}If you still want to update these packages, do a ${COLOR_RED}sudo yum update${COLOR_OFF}.
+"
 
     sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta inxi mediainfo git-lfs nvme-cli aria2
     echo "alias ncdu='ncdu --color dark'" >> ~/.bashrc
