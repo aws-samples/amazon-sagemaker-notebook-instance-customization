@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 install_code_server() {
     local LATEST_DOWNLOAD_URL=$(
         curl --silent "https://api.github.com/repos/coder/code-server/releases/latest" |   # Get latest release from GitHub api
@@ -21,8 +23,8 @@ disable-telemetry: true
 disable-update-check: true
 EOF
     export CODE_SERVER_CONFIG=/home/ec2-user/SageMaker/.initsmnb.d/code-server/config.yaml
-    echo -e '\nexport CODE_SERVER_CONFIG=/home/ec2-user/SageMaker/.initsmnb.d/code-server/config.yaml' \
-        >> ~/.bashrc
+    echo 'export CODE_SERVER_CONFIG=/home/ec2-user/SageMaker/.initsmnb.d/code-server/config.yaml' \
+        | sudo tee /etc/profile.d/code-server.sh
 }
 
 install_ext() {
@@ -373,7 +375,7 @@ show_usage() {
 EOF
 }
 
-install_code_server
+[[ -e /usr/bin/code-server ]] || install_code_server
 if [[ ! -e ~/SageMaker/.initsmnb.d/code-server/_SUCCESS ]]; then
     cat << 'EOF'
 
@@ -399,6 +401,6 @@ EOF
     touch ~/SageMaker/.initsmnb.d/code-server/_SUCCESS
 fi
 
-#rm -fr ~/SageMaker/.initsmnb.d/code-server/{CachedExtensionVSIXs,CachedExtensions}/
-rm -fr ~/SageMaker/.initsmnb.d/code-server/CachedExtensionVSIXs/
+#rm -fr ~/SageMaker/.initsmnb.d/code-server/{CachedExtensionVSIXs,CachedExtensions}/ || true
+rm -fr ~/SageMaker/.initsmnb.d/code-server/CachedExtensionVSIXs/ || true
 show_usage | tee ~/HOWTO-RUN-CODE-SERVER.txt
