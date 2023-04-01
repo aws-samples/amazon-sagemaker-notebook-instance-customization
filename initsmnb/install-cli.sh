@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
-echo "max_connections=10" | sudo tee /etc/yum.conf
+echo "max_connections=10" | sudo tee -a /etc/yum.conf
 if [[ $FLAVOR == "Amazon Linux 2" ]]; then
     sudo amazon-linux-extras install -y epel
     sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
