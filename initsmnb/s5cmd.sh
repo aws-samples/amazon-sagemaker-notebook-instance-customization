@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Constants
 APP=s5cmd
 GH=peak/s5cmd

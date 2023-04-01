@@ -1,10 +1,12 @@
 #!/bin/bash
 
+set -euo pipefail
+
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 echo "max_connections=10" | sudo tee -a /etc/yum.conf
 
 # Lots of problem, from wrong .repo content to broken selinux-container
-sudo rm /etc/yum.repos.d/docker-ce.repo
+sudo rm /etc/yum.repos.d/docker-ce.repo || true
 
 if [[ $FLAVOR == "Amazon Linux 2" ]]; then
     sudo amazon-linux-extras install -y epel
@@ -17,7 +19,7 @@ else
 fi
 
 # This nbdime is broken. It crashes with ModuleNotFoundError: jsonschema.protocols.
-rm ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/anaconda3/bin/git-nb*
+rm ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/anaconda3/bin/git-nb* || true
 hash -r
 
 # Pipx to install pre-commit. Otherwise, pre-commit is broken when installed
@@ -69,7 +71,7 @@ nbdime config-git --enable --global
 
 # pre-commit cache survives reboot (NOTE: can also set $PRE_COMMIT_HOME)
 mkdir -p ~/SageMaker/.initsmnb.d/.pre-commit.cache
-ln -s ~/SageMaker/.initsmnb.d/.pre-commit.cache ~/.cache/pre-commit
+ln -s ~/SageMaker/.initsmnb.d/.pre-commit.cache ~/.cache/pre-commit || true
 
 # ranger defaults to relative line number
 mkdir -p ~/.config/ranger/
@@ -80,7 +82,7 @@ aria2c -x5 --dir /tmp -o awscli2.zip https://awscli.amazonaws.com/awscli-exe-lin
 cd /tmp && unzip -q /tmp/awscli2.zip
 cd aws
 aws/install --update --install-dir ~/SageMaker/.initsmnb.d/aws-cli-v2 --bin-dir ~/SageMaker/.initsmnb.d/bin
-sudo ln -s ~/SageMaker/.initsmnb.d/bin/aws /usr/local/bin/aws2
+sudo ln -s ~/SageMaker/.initsmnb.d/bin/aws /usr/local/bin/aws2 || true
 rm /tmp/awscli2.zip
 rm -fr /tmp/aws/
 # Borrow these settings from aws-samples hpc repo

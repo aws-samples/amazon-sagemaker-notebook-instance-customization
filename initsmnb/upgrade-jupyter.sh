@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 if [[ $FLAVOR != "Amazon Linux 2" ]]; then
     echo ${BASH_SOURCE[0]} does not support alinux instance.
@@ -27,9 +29,9 @@ declare -a EXTS_TO_DEL=(
     jupyterlab-toc
     jupyterlab-git
     nbdime-jupyterlab
-)
+)2
 for i in "${EXTS_TO_DEL[@]}"; do
-    rm $CONDA_ENV_DIR/share/jupyter/lab/extensions/$i-*.tgz
+    rm $CONDA_ENV_DIR/share/jupyter/lab/extensions/$i-*.tgz || true
 done
 
 # Do whatever it takes to prevent JLab pop-up "Build recommended..."
@@ -217,7 +219,7 @@ EOF
 
 # Undo the old "mac-option-is-meta" mechanism designed for jlab<3.0.
 echo "# JLab-3 + macOptionIsMeta deprecates fix-osx-keymap.sh" > ~/.inputrc
-rm ~/.ipython/profile_default/startup/01-osx-jupyterlab-keys.py
+rm ~/.ipython/profile_default/startup/01-osx-jupyterlab-keys.py || true
 
 # Show command palette on lhs navbar, similar behavior to smnb.
 mkdir -p $JUPYTER_CONFIG_ROOT/apputils-extension/

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 install_code_server() {
     local LATEST_DOWNLOAD_URL=$(
         curl --silent "https://api.github.com/repos/coder/code-server/releases/latest" |   # Get latest release from GitHub api
@@ -399,6 +401,6 @@ EOF
     touch ~/SageMaker/.initsmnb.d/code-server/_SUCCESS
 fi
 
-#rm -fr ~/SageMaker/.initsmnb.d/code-server/{CachedExtensionVSIXs,CachedExtensions}/
-rm -fr ~/SageMaker/.initsmnb.d/code-server/CachedExtensionVSIXs/
+#rm -fr ~/SageMaker/.initsmnb.d/code-server/{CachedExtensionVSIXs,CachedExtensions}/ || true
+rm -fr ~/SageMaker/.initsmnb.d/code-server/CachedExtensionVSIXs/ || true
 show_usage | tee ~/HOWTO-RUN-CODE-SERVER.txt

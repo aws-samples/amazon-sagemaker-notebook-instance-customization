@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Constants
 APP=duf
 GH=muesli/duf
