@@ -33,6 +33,7 @@ mkdir -p ~/SageMaker/.initsmnb.d
 mkdir -p ~/.local/bin
 
 (
+    set -euo pipefail
     ${BIN_DIR}/install-cli.sh
     ${BIN_DIR}/duf.sh
     ${BIN_DIR}/s5cmd.sh
@@ -99,12 +100,10 @@ rm -fr ~/.cache/{pip,yarn}/
 #~/anaconda3/condabin/conda clean --all -y
 
 # Any failed jobs?
-echo "Jobs status:"
+echo -e "\nJobs status:"
 tail -n1 ~/INITSMNB*txt
-echo
 
 # Final checks and next steps to see the changes in-effect
-echo ; cat ~/HOWTO-RUN-CODE-SERVER.txt
 ${BIN_DIR}/final-check.sh
 
 echo "Elapsed: $(($SECONDS / 60))min $(($SECONDS % 60))sec
