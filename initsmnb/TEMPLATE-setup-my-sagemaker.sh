@@ -80,6 +80,13 @@ if [[ $CONFIG_DOCKER == 1 ]]; then
 fi
 
 # Wait for background jobs to complete.
+echo "
+Waiting for these jobs to complete...
+$(jobs)
+
+Their logs are located below:
+$(ls -al ~/INITSMNB-*.txt)
+"
 wait
 
 # Improve code-server's UX in dealing with persistent conda environments.
@@ -93,10 +100,11 @@ rm -fr ~/.cache/{pip,yarn}/
 
 # Any failed jobs?
 echo "Jobs status:"
-tail -1 ~/INITSMNB*txt
+tail -n1 ~/INITSMNB*txt
 echo
 
 # Final checks and next steps to see the changes in-effect
+echo ; cat ~/HOWTO-RUN-CODE-SERVER.txt
 ${BIN_DIR}/final-check.sh
 
 echo "Elapsed: $(($SECONDS / 60))min $(($SECONDS % 60))sec

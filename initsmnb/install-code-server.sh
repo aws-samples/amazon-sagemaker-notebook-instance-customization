@@ -375,7 +375,7 @@ show_usage() {
 EOF
 }
 
-install_code_server
+[[ -e /usr/bin/code-server ]] || install_code_server
 if [[ ! -e ~/SageMaker/.initsmnb.d/code-server/_SUCCESS ]]; then
     cat << 'EOF'
 
