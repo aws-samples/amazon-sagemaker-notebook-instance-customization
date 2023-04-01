@@ -1,13 +1,11 @@
 #!/bin/bash
 
 # Final remarks on why by default, initsmnb didn't update existing SageMaker packages
-SM_PKG_TO_UPDATE=$(sudo yum -q check-update 2> /dev/null | wc -l)
 COLOR_RED="\033[1;31m"
 COLOR_OFF="\033[0m"
 echo -e "
-${COLOR_RED}Did not update ${SM_PKG_TO_UPDATE}+ SageMaker-provided packages because it takes time.
-${COLOR_OFF}If you still want to update these packages, run ${COLOR_RED}sudo yum update${COLOR_OFF}.
-"
+${COLOR_RED}Did not update 100+ SageMaker-provided packages because it takes time.
+${COLOR_OFF}If you still want to update these packages, run ${COLOR_RED}sudo yum update${COLOR_OFF}."
 
 # After all customizations applied, do a final check and display next steps
 # to have the customizations in-effect.
@@ -20,7 +18,6 @@ else
 fi
 
 cat << EOF
-
 
 ###############################################################################
 # Customizations applied. Next, follow these steps to see them in-effect.     #

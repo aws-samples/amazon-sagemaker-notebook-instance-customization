@@ -91,5 +91,5 @@ rm -fr ~/.cache/{pip,yarn}/
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
 
-echo "
-Elapsed: $(($SECONDS / 60))min $(($SECONDS % 60))sec"
+echo "Elapsed: $(($SECONDS / 60))min $(($SECONDS % 60))sec
+"
