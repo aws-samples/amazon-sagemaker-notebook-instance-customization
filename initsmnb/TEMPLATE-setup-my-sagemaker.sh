@@ -84,6 +84,7 @@ ${BIN_DIR}/install-code-server.sh
 ~/anaconda3/bin/conda config --append envs_dirs ~/SageMaker/envs
 
 # Free up a bit more space on the ephemeral volume
+sudo yum clean packages headers expire-cache plugins dbcache
 rm -fr ~/.cache/{pip,yarn}/
 # This operation turns out to be slow...
 #~/anaconda3/condabin/conda clean --all -y

@@ -18,15 +18,8 @@ fi
 CONDA_ENV_DIR=~/anaconda3/envs/JupyterSystemEnv/
 BIN_DIR=$CONDA_ENV_DIR/bin
 
-# Uninstall the old jupyter proxy, to unblock Streamlit.
-$BIN_DIR/jupyter serverextension disable --py nbserverproxy
-sed -i \
-    's/"nbserverproxy": true/"nbserverproxy": false/g' \
-    $CONDA_ENV_DIR/etc/jupyter/jupyter_notebook_config.json
-$BIN_DIR/pip uninstall --yes nbserverproxy
-
 # Completely remove these unused or outdated Python packages.
-$BIN_DIR/pip uninstall --yes nbdime jupyterlab-git
+$BIN_DIR/pip uninstall --yes jupyterlab-git
 
 # These will be outdated by Jlab-3.x which has built-in versions of them.
 declare -a EXTS_TO_DEL=(
@@ -47,7 +40,7 @@ cat $CONDA_ENV_DIR/share/jupyter/lab/static/package.json.ori \
   > $CONDA_ENV_DIR/share/jupyter/lab/static/package.json
 
 # Also silence JLab pop-up "Build recommended..." due to SageMaker extensions (examples and session agent).
-cat << 'EOF' > ~/.jupyter/jupyter_server_config.json 
+cat << 'EOF' > ~/.jupyter/jupyter_server_config.json
 {
   "LabApp": {
     "tornado_settings": {
@@ -76,11 +69,36 @@ declare -a PKGS=(
     jupyter_core
 
     jupyter_bokeh
+
+    # https://github.com/jupyter/nbdime/issues/621
     nbdime
+    ipython_genutils
+
     jupyterlab-execute-time
     jupyterlab-skip-traceback
     jupyterlab-unfold
     stickyland
+
+    # jupyterlab_code_formatter requires formatters in its venv.
+    # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/153
+    #
+    # [20230401] v1.6.0 is broken on python<=3.8
+    # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/193#issuecomment-1488742233
+    "jupyterlab_code_formatter!=1.6.0"
+    black
+    isort
+)
+# Overwrite above definition of PKGS to exclude jlab packages. This is done to reduce update time
+# (because sagemaker alinux2 is pretty up-to-date. Usually 1-2 patch versions away only).
+# To still update jlab packages, comment the PKGS definition below.
+declare -a PKGS=(
+    "environment_kernels>=1.2.0"  # https://github.com/Cadair/jupyter_environment_kernels/releases/tag/v1.2.0
+    jupyter_bokeh
+    jupyterlab-execute-time
+    jupyterlab-skip-traceback
+    jupyterlab-unfold
+    stickyland
+    ipython_genutils  # https://github.com/jupyter/nbdime/issues/621
 
     # jupyterlab_code_formatter requires formatters in its venv.
     # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/153

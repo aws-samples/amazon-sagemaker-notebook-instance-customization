@@ -9,17 +9,12 @@ sudo rm /etc/yum.repos.d/docker-ce.repo
 if [[ $FLAVOR == "Amazon Linux 2" ]]; then
     sudo amazon-linux-extras install -y epel
     sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
-    sudo yum makecache
-
-    # Disable, it's slow. 180+ packages to update over vanilla SageMaker packages.
-    #sudo yum update -y
-
+    #sudo yum update -y  # Disable. It's slow to update 100+ SageMaker-provided packages.
     sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta inxi mediainfo git-lfs nvme-cli aria2
     echo "alias ncdu='ncdu --color dark'" >> ~/.bashrc
 else
     sudo yum install -y htop tree dstat dos2unix tig
 fi
-sudo yum clean packages headers expire-cache plugins dbcache
 
 # This nbdime is broken. It crashes with ModuleNotFoundError: jsonschema.protocols.
 rm ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/anaconda3/bin/git-nb*
