@@ -16,6 +16,8 @@ get_bin_dir() {
     echo -n ${BIN_DIR}
 }
 
+SECONDS=0
+
 BIN_DIR=$(get_bin_dir)
 CONFIG_DOCKER=1
 PLAIN_OLD_JLAB=0
@@ -88,3 +90,6 @@ rm -fr ~/.cache/{pip,yarn}/
 
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
+
+echo "
+Elapsed: $(($SECONDS / 60))min $(($SECONDS % 60))sec"
