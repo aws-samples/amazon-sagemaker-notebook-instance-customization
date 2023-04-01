@@ -57,9 +57,11 @@ install_ext() {
         "yzhang.markdown-all-in-one"
     )
 
+    declare -a EXT_ARGS=()
     for i in "${EXT[@]}"; do
-        code-server --install-extension "$i"
+        EXT_ARGS+=(--install-extension "$i")
     done
+    code-server "${EXT_ARGS[@]}"
 }
 
 apply_setting() {
