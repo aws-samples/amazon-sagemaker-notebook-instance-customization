@@ -68,6 +68,7 @@ declare -a PKGS=(
     ipykernel
     jupyterlab
     jupyter-server-proxy
+    "environment_kernels>=1.2.0"  # https://github.com/Cadair/jupyter_environment_kernels/releases/tag/v1.2.0
 
     jupyter
     jupyter_client
@@ -92,9 +93,6 @@ declare -a PKGS=(
 )
 $BIN_DIR/pip install --no-cache-dir --upgrade pip  # Let us welcome colorful pip.
 $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
-
-# See https://github.com/Cadair/jupyter_environment_kernels/pull/41
-$BIN_DIR/pip install --no-cache-dir --force 'git+https://github.com/verdimrc/jupyter_environment_kernels.git@master#egg=environment_kernels'
 
 
 ################################################################################
