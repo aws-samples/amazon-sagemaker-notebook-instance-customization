@@ -86,7 +86,7 @@ declare -a NESTED_FILES=(
     .ipython/profile_default/startup/01-osx-jupyterlab-keys.py
 )
 
-CURL_OPTS="--fail-early -fL"
+CURL_OPTS="--fail-early -Z -fL"
 
 FROM_LOCAL=0
 GIT_USER=''
