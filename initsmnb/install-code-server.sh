@@ -23,8 +23,8 @@ disable-telemetry: true
 disable-update-check: true
 EOF
     export CODE_SERVER_CONFIG=/home/ec2-user/SageMaker/.initsmnb.d/code-server/config.yaml
-    echo -e '\nexport CODE_SERVER_CONFIG=/home/ec2-user/SageMaker/.initsmnb.d/code-server/config.yaml' \
-        >> ~/.bashrc
+    echo 'export CODE_SERVER_CONFIG=/home/ec2-user/SageMaker/.initsmnb.d/code-server/config.yaml' \
+        | sudo tee /etc/profile.d/code-server.sh
 }
 
 install_ext() {

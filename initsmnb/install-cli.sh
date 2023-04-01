@@ -12,7 +12,7 @@ sudo amazon-linux-extras install -y epel
 sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
 #sudo yum update -y  # Disable. It's slow to update 100+ SageMaker-provided packages.
 sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta inxi mediainfo git-lfs nvme-cli aria2
-echo "alias ncdu='ncdu --color dark'" >> ~/.bashrc
+echo "alias ncdu='ncdu --color dark'" | sudo tee /etc/profile.d/initsmnb-cli.sh
 
 # This nbdime is broken. It crashes with ModuleNotFoundError: jsonschema.protocols.
 rm ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/anaconda3/bin/git-nb* || true
@@ -26,7 +26,8 @@ hash -r
 # Relocate pipx packages to ~/SageMaker to survive reboot
 export PIPX_HOME=~/SageMaker/.initsmnb.d/pipx
 export PIPX_BIN_DIR=~/SageMaker/.initsmnb.d/bin
-cat << EOF >> ~/.bashrc
+cat << EOF | sudo tee -a /etc/profile.d/initsmnb-cli.sh
+
 # Add pipx binaries to PATH. In addition, add also ~/.local/bin so that its
 # commands are usable by Jupyter kernels (notable example: docker-compose for
 # SageMaker local mode).

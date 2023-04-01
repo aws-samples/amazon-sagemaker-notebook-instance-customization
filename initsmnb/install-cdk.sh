@@ -5,7 +5,7 @@ set -euo pipefail
 ################################################################################
 # STEP-00: environment variables related to CDK
 ################################################################################
-cat << 'EOF' >> ~/.bashrc
+cat << 'EOF' | sudo tee /etc/profile.d/cdk.sh
 
 # NVM installation after this env. var. is effective should survive reboots.
 export NVM_DIR=$HOME/SageMaker/.initsmnb.d/.nvm
