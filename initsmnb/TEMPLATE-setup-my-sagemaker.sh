@@ -123,7 +123,11 @@ echo "
 Waiting for these jobs to complete...
 $(jobs)
 
-Their logs are located below:
+Usually they take 4+ minutes to 7+ minutes. The high-side is typically the first
+time ever running initsmnb on a notebook instance, with more stuffs to install.
+The lower-side is for subsequent initsmnb runs (typically on notebook restart).
+
+Job logs:
 $(ls -al ~/INITSMNB-*.txt)
 "
 wait
