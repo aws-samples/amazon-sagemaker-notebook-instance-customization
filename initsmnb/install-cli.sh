@@ -2,6 +2,10 @@
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 echo "max_connections=10" | sudo tee -a /etc/yum.conf
+
+# Lots of problem, from wrong .repo content to broken selinux-container
+sudo rm /etc/yum.repos.d/docker-ce.repo
+
 if [[ $FLAVOR == "Amazon Linux 2" ]]; then
     sudo amazon-linux-extras install -y epel
     sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
@@ -14,7 +18,7 @@ if [[ $FLAVOR == "Amazon Linux 2" ]]; then
 else
     sudo yum install -y htop tree dstat dos2unix tig
 fi
-sudo yum clean all
+sudo yum clean packages headers expire-cache plugins dbcache
 
 ~/anaconda3/bin/nbdime config-git --enable --global
 ln -s ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/.local/bin
