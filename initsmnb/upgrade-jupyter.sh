@@ -83,7 +83,10 @@ declare -a PKGS=(
 
     # jupyterlab_code_formatter requires formatters in its venv.
     # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/153
-    jupyterlab_code_formatter
+    #
+    # [20230401] v1.6.0 is broken on python<=3.8
+    # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/193#issuecomment-1488742233
+    "jupyterlab_code_formatter!=1.6.0"
     black
     isort
 )
