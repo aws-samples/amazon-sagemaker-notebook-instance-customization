@@ -344,7 +344,7 @@ EOF
 
 # Disable notification -- Jlab started to get extremely noisy since v3.6.0+
 mkdir -p $JUPYTER_CONFIG_ROOT/settingeditor-extension
-cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/notification.jupyterlab-settings
+cat << 'EOF' > $JUPYTER_CONFIG_ROOT/apputils-extension/notification.jupyterlab-settings
 {
     // Notifications
     // @jupyterlab/apputils-extension:notification
@@ -352,7 +352,7 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/notification.jupyterlab-set
     // *******************************************
 
     // Check for JupyterLab updates
-    // Whether to check for newer version of JupyterLab or not. It requires `fechNews` to be `true`
+    // Whether to check for newer version of JupyterLab or not. It requires `fetchNews` to be `true`
     // to be active. If `true`, it will make a request to a website.
     "checkForUpdates": false,
 
