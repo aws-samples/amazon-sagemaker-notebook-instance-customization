@@ -3,20 +3,16 @@
 set -euo pipefail
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
-echo "max_connections=10" | sudo tee -a /etc/yum.conf
+grep '^max_connections=' /etc/yum.conf &> /dev/null || echo "max_connections=10" | sudo tee -a /etc/yum.conf
 
 # Lots of problem, from wrong .repo content to broken selinux-container
 sudo rm /etc/yum.repos.d/docker-ce.repo || true
 
-if [[ $FLAVOR == "Amazon Linux 2" ]]; then
-    sudo amazon-linux-extras install -y epel
-    sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
-    #sudo yum update -y  # Disable. It's slow to update 100+ SageMaker-provided packages.
-    sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta inxi mediainfo git-lfs nvme-cli aria2
-    echo "alias ncdu='ncdu --color dark'" >> ~/.bashrc
-else
-    sudo yum install -y htop tree dstat dos2unix tig
-fi
+sudo amazon-linux-extras install -y epel
+sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
+#sudo yum update -y  # Disable. It's slow to update 100+ SageMaker-provided packages.
+sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta inxi mediainfo git-lfs nvme-cli aria2
+echo "alias ncdu='ncdu --color dark'" >> ~/.bashrc
 
 # This nbdime is broken. It crashes with ModuleNotFoundError: jsonschema.protocols.
 rm ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/anaconda3/bin/git-nb* || true

@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Only support alinux2
+FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
+if [[ $FLAVOR != "Amazon Linux 2" ]]; then
+    echo ${BASH_SOURCE[0]} does not support alinux instance.
+    exit 1
+fi
+
 # Utility function to get script's directory (deal with Mac OSX quirkiness).
 # This function is ambidextrous as it works on both Linux and OSX.
 get_bin_dir() {
@@ -17,13 +24,21 @@ get_bin_dir() {
 }
 
 SECONDS=0
-
 BIN_DIR=$(get_bin_dir)
 CONFIG_DOCKER=1
 
 # Ensure that we run only on a SageMaker classic notebook instance.
 ${BIN_DIR}/ensure-smnb.sh
 [[ $? != 0 ]] && exit 1
+
+# Early install aria2c CLI, as it may be required by jobs running in subprocesses.
+(
+    echo "max_connections=10" | sudo tee -a /etc/yum.conf
+    # Lots of problem, from wrong .repo content to broken selinux-container
+    sudo rm /etc/yum.repos.d/docker-ce.repo || true
+    sudo amazon-linux-extras install -y epel
+    sudo yum install -y aria2
+)
 
 # Placeholder to store persistent config files
 mkdir -p ~/SageMaker/.initsmnb.d
@@ -94,7 +109,7 @@ wait
 ~/anaconda3/bin/conda config --append envs_dirs ~/SageMaker/envs
 
 # Free up a bit more space on the ephemeral volume
-sudo yum clean packages headers expire-cache plugins dbcache
+sudo yum clean packages
 rm -fr ~/.cache/{pip,yarn}/
 # This operation turns out to be slow...
 #~/anaconda3/condabin/conda clean --all -y
