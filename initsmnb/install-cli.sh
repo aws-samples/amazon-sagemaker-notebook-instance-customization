@@ -20,9 +20,9 @@ else
 fi
 sudo yum clean packages headers expire-cache plugins dbcache
 
-~/anaconda3/bin/nbdime config-git --enable --global
-ln -s ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/.local/bin
-ln -s ~/anaconda3/bin/git-nb* ~/.local/bin
+# This nbdime is broken. It crashes with ModuleNotFoundError: jsonschema.protocols.
+rm ~/anaconda3/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/anaconda3/bin/git-nb*
+hash -r
 
 # Pipx to install pre-commit. Otherwise, pre-commit is broken when installed
 # with /usr/bin/pip3 (alinux), but we don't want to use ~/anaconda/bin/pip3
@@ -63,6 +63,12 @@ declare -a PKG=(
 for i in "${PKG[@]}"; do
     ~/anaconda3/bin/pipx install $i
 done
+
+~/anaconda3/bin/pipx install nbdime
+# https://github.com/jupyter/nbdime/issues/621
+~/anaconda3/bin/pipx inject nbdime ipython_genutils
+nbdime config-git --enable --global
+
 ~/anaconda3/bin/pipx upgrade-all
 
 # pre-commit cache survives reboot (NOTE: can also set $PRE_COMMIT_HOME)
