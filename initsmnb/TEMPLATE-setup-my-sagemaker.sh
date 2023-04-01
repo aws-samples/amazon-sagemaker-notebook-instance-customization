@@ -47,11 +47,19 @@ mkdir -p ~/SageMaker/.initsmnb.d
 # custom environments don't have to install them, e.g., nbdime, docker-compose.
 mkdir -p ~/.local/bin
 
+run_and_track_stat() {
+    local cmd
+    local basecmd
+    for cmd in "$@"; do
+        basecmd=$(basename $cmd)
+        $cmd || echo "INITSMNB SUCCESS $basecmd" || echo "INITSMNB ERROR $basecmd"
+    done
+}
+
 (
-    set -euo pipefail
-    ${BIN_DIR}/install-cli.sh
-    ${BIN_DIR}/duf.sh
-    ${BIN_DIR}/s5cmd.sh
+    run_and_track_stat ${BIN_DIR}/install-cli.sh
+    run_and_track_stat ${BIN_DIR}/duf.sh
+    run_and_track_stat ${BIN_DIR}/s5cmd.sh
 ) &> ~/INITSMNB-install-cli.txt &
 
 # These require jupyter lab restarted and browser reloaded, to see the changes.
@@ -71,9 +79,9 @@ echo "c.FileCheckpoints.checkpoint_dir = '/tmp/.ipynb_checkpoints'" \
 echo "c.FileCheckpoints.checkpoint_dir = '/tmp/.ipynb_checkpoints'" \
     >> ~/.jupyter/jupyter_server_config.py
 
-${BIN_DIR}/upgrade-jupyter.sh &> ~/INITSMNB-upgrade-jupyter.txt &
-${BIN_DIR}/install-cdk.sh &> ~/INITSMNB-install-cdk.txt &
-${BIN_DIR}/install-code-server.sh &> ~/INITSMNB-install-code-server.txt &
+run_and_track_stat ${BIN_DIR}/upgrade-jupyter.sh     &> ~/INITSMNB-upgrade-jupyter.txt &
+run_and_track_stat ${BIN_DIR}/install-cdk.sh         &> ~/INITSMNB-install-cdk.txt &
+run_and_track_stat ${BIN_DIR}/install-code-server.sh &> ~/INITSMNB-install-code-server.txt &
 
 ${BIN_DIR}/adjust-sm-git.sh 'Firstname Lastname' first.last@email.abc
 ${BIN_DIR}/fix-osx-keymap.sh
@@ -116,7 +124,7 @@ rm -fr ~/.cache/{pip,yarn}/
 
 # Any failed jobs?
 echo -e "\nJobs status:"
-tail -n1 ~/INITSMNB*txt
+egrep -e '^INITSMNB SUCCESS|^INITSMNB ERROR' ~/INITSMNB*txt
 
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
