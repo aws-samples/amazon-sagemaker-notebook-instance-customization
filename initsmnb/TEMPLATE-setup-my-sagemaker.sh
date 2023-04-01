@@ -1,5 +1,8 @@
 #!/bin/bash
 
+################################################################################
+# 000: Prolog
+################################################################################
 # Only support alinux2
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 if [[ $FLAVOR != "Amazon Linux 2" ]]; then
@@ -31,6 +34,10 @@ CONFIG_DOCKER=1
 ${BIN_DIR}/ensure-smnb.sh
 [[ $? != 0 ]] && exit 1
 
+
+################################################################################
+# 010: Dependencies
+################################################################################
 # Early install aria2c CLI, as it may be required by jobs running in subprocesses.
 (
     echo "max_connections=10" | sudo tee -a /etc/yum.conf
@@ -47,12 +54,16 @@ mkdir -p ~/SageMaker/.initsmnb.d
 # custom environments don't have to install them, e.g., nbdime, docker-compose.
 mkdir -p ~/.local/bin
 
+
+################################################################################
+# 020: Here we go...
+################################################################################
 run_and_track_stat() {
     local cmd
     local basecmd
     for cmd in "$@"; do
         basecmd=$(basename $cmd)
-        $cmd || echo "INITSMNB SUCCESS $basecmd" || echo "INITSMNB ERROR $basecmd"
+        $cmd && echo "INITSMNB SUCCESS $basecmd" || echo "INITSMNB ERROR $basecmd"
     done
 }
 
@@ -103,6 +114,10 @@ if [[ $CONFIG_DOCKER == 1 ]]; then
     ${BIN_DIR}/restart-docker.sh
 fi
 
+
+################################################################################
+# 030: Wrapping up...
+################################################################################
 # Wait for background jobs to complete.
 echo "
 Waiting for these jobs to complete...
@@ -126,6 +141,10 @@ rm -fr ~/.cache/{pip,yarn}/
 echo -e "\nJobs status:"
 egrep -e '^INITSMNB SUCCESS|^INITSMNB ERROR' ~/INITSMNB*txt
 
+
+################################################################################
+# 040: Epilog
+################################################################################
 # Final checks and next steps to see the changes in-effect
 ${BIN_DIR}/final-check.sh
 
