@@ -6,7 +6,7 @@ if [[ $FLAVOR == "Amazon Linux 2" ]]; then
     sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/cyqsimon/el-rust-pkgs/repo/epel-7/cyqsimon-el-rust-pkgs-epel-7.repo
     # Slow install; hence disabled by default
     #sudo yum update -y
-    sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta inxi mediainfo git-lfs
+    sudo yum install -y htop tree fio dstat dos2unix tig ncdu ripgrep bat git-delta inxi mediainfo git-lfs aria2
     echo "alias ncdu='ncdu --color dark'" >> ~/.bashrc
 else
     sudo yum install -y htop tree dstat dos2unix tig
@@ -68,7 +68,7 @@ echo set line_numbers relative >> ~/.config/ranger/rc.conf
 
 # Catch-up with awscliv2 which has nearly weekly releases.
 wget -O /tmp/awscli2.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-cd /tmp && unzip /tmp/awscli2.zip
+cd /tmp && unzip -q /tmp/awscli2.zip
 ./install --update --install-dir ~/SageMaker/.initsmnb.d/aws-cli-v2 --bin-dir ~/SageMaker/.initsmnb.d/bin
 sudo ln -s ~/SageMaker/.initsmnb.d/bin/aws /usr/local/bin/aws2
 rm /tmp/awscli2.zip
