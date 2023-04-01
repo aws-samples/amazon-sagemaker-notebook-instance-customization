@@ -1,8 +1,16 @@
 #!/bin/bash
 
 install_code_server() {
-    curl -fsSL https://code-server.dev/install.sh | sh -s -- #--version 4.7.1
-    rm -fr ~/.cache/code-server/
+    local LATEST_DOWNLOAD_URL=$(
+        curl --silent "https://api.github.com/repos/coder/code-server/releases/latest" |   # Get latest release from GitHub api
+            grep "\"browser_download_url\": \"https.*\/code-server-.*-amd64.rpm" |  # Get download url
+            sed -E 's/.*"([^"]+)".*/\1/'                                         # Pluck JSON value
+    )
+
+    local RPM=${LATEST_DOWNLOAD_URL##*/}
+    aria2c -x10 --dir /tmp -o ${RPM} ${LATEST_DOWNLOAD_URL}
+    sudo yum localinstall -y /tmp/$RPM && rm /tmp/$RPM
+    [[ -d ~/.cache/code-server/ ]] && rm -fr ~/.cache/code-server/
 
     mkdir -p ~/SageMaker/.initsmnb.d/code-server/
     cat << 'EOF' > ~/SageMaker/.initsmnb.d/code-server/config.yaml
