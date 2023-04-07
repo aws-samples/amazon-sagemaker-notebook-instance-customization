@@ -126,9 +126,7 @@ echo -e "
 Waiting for these jobs to complete...
 $(jobs)
 
-Usually they take ${COLOR_RED}~4 minutes${COLOR_OFF} to ${COLOR_RED}5+ minutes${COLOR_OFF}. The high-side is typically the first
-time ever running initsmnb on a notebook instance, with more stuffs to install.
-The lower-side is for subsequent initsmnb runs (typically on notebook restart).
+They may take ${COLOR_RED}~4 minutes${COLOR_OFF} (on ml.t3.medium in ap-southeast-1 / Singapore).
 
 Job logs:
 $(ls -al ~/INITSMNB-*.txt)

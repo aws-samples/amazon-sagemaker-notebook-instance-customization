@@ -54,6 +54,9 @@ your notebook instance enables
 [root access for notebook users](https://aws.amazon.com/blogs/machine-learning/control-root-access-to-amazon-sagemaker-notebook-instances/), and
 **\[Need internet\]** requires internet connection.
 
+- **\[Need sudo & internet\]** [code-server](https://github.com/coder/code-server) and opinionated
+  extensions for Python data science works.
+
 - **\[Need sudo & internet\]** Docker: enable SageMaker local mode, and advance docker customizations.
   See [here](#53-docker-tweaks) for details, and how to disable.
   - Please note that you may need to increase your notebook instance's EBS to make sure that the
