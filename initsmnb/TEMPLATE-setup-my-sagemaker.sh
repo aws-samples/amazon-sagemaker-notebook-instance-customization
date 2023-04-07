@@ -90,6 +90,7 @@ echo "c.FileCheckpoints.checkpoint_dir = '/tmp/.ipynb_checkpoints'" \
 echo "c.FileCheckpoints.checkpoint_dir = '/tmp/.ipynb_checkpoints'" \
     >> ~/.jupyter/jupyter_server_config.py
 
+run_and_track_stat ${BIN_DIR}/install-pipx.sh        &> ~/INITSMNB-install-pipx.txt &
 run_and_track_stat ${BIN_DIR}/upgrade-jupyter.sh     &> ~/INITSMNB-upgrade-jupyter.txt &
 run_and_track_stat ${BIN_DIR}/install-cdk.sh         &> ~/INITSMNB-install-cdk.txt &
 run_and_track_stat ${BIN_DIR}/install-code-server.sh &> ~/INITSMNB-install-code-server.txt &
@@ -119,11 +120,13 @@ fi
 # 030: Wrapping up...
 ################################################################################
 # Wait for background jobs to complete.
-echo "
+COLOR_RED="\033[1;31m"
+COLOR_OFF="\033[0m"
+echo -e "
 Waiting for these jobs to complete...
 $(jobs)
 
-Usually they take 4+ minutes to 7+ minutes. The high-side is typically the first
+Usually they take ${COLOR_RED}~4 minutes${COLOR_OFF} to ${COLOR_RED}5+ minutes${COLOR_OFF}. The high-side is typically the first
 time ever running initsmnb on a notebook instance, with more stuffs to install.
 The lower-side is for subsequent initsmnb runs (typically on notebook restart).
 

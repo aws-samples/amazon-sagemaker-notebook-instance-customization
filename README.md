@@ -70,7 +70,7 @@ your notebook instance enables
     survives instance reboot.
 
     You can create a new custom conda environment as follows:
-    `conda create --prefix /home/ec2-user/SageMaker/envs/MY_CUSTOM_ENV_NAME python=3.9 ipykernel`.
+    `conda create --prefix /home/ec2-user/SageMaker/envs/MY_CUSTOM_ENV_NAME python=3.10 ipykernel`.
     Replace the environment name and python version with your choice. Please note that conda
     environment must have `ipykernel` package installed. Once the environment is created, you may
     need to [restart JupyterLab](#51-restart-jupyterlab) before you can see the environment
@@ -119,8 +119,6 @@ your notebook instance enables
 
 - **\[Need sudo\]** Optionally mount one or more EFS.
 
-- [Experimental tweaks](#53-experimental-tweaks) (off by default)
-
 ## 3. Installation
 
 This step needs to be done **once** on a newly *created* notebook instance.
@@ -165,7 +163,7 @@ mounted as `/home/ec2-user/mnt/my_efs_01/`, while the second one `fs-456` will
 be mounted as `/home/ec2-user/mnt/my_efs_02/`.
 
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
-Your next step is to jump to section [Usage](#14-usage).
+Your next step is to jump to section [Usage](#4-usage).
 
 ### 3.2. Installation from local source
 
@@ -179,7 +177,7 @@ cd amazon-sagemaker-notebook-instance-customization/initsmnb
 ```
 
 After the installation step finishes, you should see a new directory created: `/home/ec2-user/SageMaker/initsmnb/`.
-Your next step is to jump to section [Usage](#14-usage).
+Your next step is to jump to section [Usage](#4-usage).
 
 ## 4. Usage
 

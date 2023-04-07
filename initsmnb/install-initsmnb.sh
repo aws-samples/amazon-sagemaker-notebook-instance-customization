@@ -68,6 +68,7 @@ declare -a SCRIPTS=(
     fix-ipython.sh
     init-vim.sh
     install-cdk.sh
+    install-pipx.sh
     QUICKSTART-CDK.md
     fix-pyspark-smnb.sh
     mount-efs-accesspoint.sh
