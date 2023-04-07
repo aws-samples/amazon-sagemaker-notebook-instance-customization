@@ -93,6 +93,7 @@ GIT_USER=''
 GIT_EMAIL=''
 CONFIG_DOCKER=1
 PLAIN_OLD_JLAB=0
+INSTALL_CDK=1
 
 declare -a EFS=()
 
@@ -101,6 +102,7 @@ declare -a HELP=(
     "[-l|--from-local]"
     "[--git-user 'First Last']"
     "[--git-email me@abc.def]"
+    "[--no-cdk]"
     "[--efs 'fsid,fsap,mp' [--efs ...]]"
     "[--no-config-docker]"
     "[--plain-old-jlab]"
@@ -146,6 +148,10 @@ parse_args() {
             ;;
         --plain-old-jlab)
             PLAIN_OLD_JLAB=1
+            shift
+            ;;
+        --no-cdk)
+            INSTALL_CDK=0
             shift
             ;;
         *)
@@ -233,6 +239,9 @@ sed \
     -e "s/^PLAIN_OLD_JLAB=0$/PLAIN_OLD_JLAB=$PLAIN_OLD_JLAB/" \
     TEMPLATE-setup-my-sagemaker.sh >> setup-my-sagemaker.sh
 chmod ugo+x setup-my-sagemaker.sh
+
+[[ $INSTALL_CDK == 0 ]] \
+    && sed -i "s|^\(run_and_track_stat .*/install-cdk.sh .*\)$|#\1|" setup-my-sagemaker.sh
 
 # Delete mount script if no efs requested.
 # WARNING: when testing on OSX, next line must use gsed.
