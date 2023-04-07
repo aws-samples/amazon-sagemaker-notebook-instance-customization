@@ -21,8 +21,7 @@ hash -r
 # Use the good working nbdime
 ln -s ~/anaconda3/envs/JupyterSystemEnv/bin/nb{diff,diff-web,dime,merge,merge-web,show} ~/.local/bin/ || true
 ln -s ~/anaconda3/envs/JupyterSystemEnv/bin/git-nb* ~/.local/bin/ || true
-echo "nbdime path is $(which nbdime)"
-nbdime config-git --enable --global
+~/.local/bin/nbdime config-git --enable --global
 
 # pre-commit cache survives reboot (NOTE: can also set $PRE_COMMIT_HOME)
 mkdir -p ~/SageMaker/.initsmnb.d/.pre-commit.cache
