@@ -356,6 +356,10 @@ cat << 'EOF' > $JUPYTER_CONFIG_ROOT/apputils-extension/notification.jupyterlab-s
     // to be active. If `true`, it will make a request to a website.
     "checkForUpdates": false,
 
+    // Silence all notifications
+    // If `true`, no toast notifications will be automatically displayed.
+    "doNotDisturbMode": true,
+
     // Fetch official Jupyter news
     // Whether to fetch news from Jupyter news feed. If `true`, it will make a request to a website.
     "fetchNews": "false"
