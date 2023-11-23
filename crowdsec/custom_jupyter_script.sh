@@ -164,13 +164,22 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/fileeditor-extension/plugin.jupyterlab-setting
     // Text editor settings.
     // ***************************************
     "editorConfig": {
-        "rulers": [80, 100],
+        "autoClosingBrackets": true,
         "codeFolding": true,
+        "cursorBlinkRate": 530,
+        "fontFamily": null,
+        "fontSize": null,
+        "insertSpaces": true,
+        "lineHeight": null,
         "lineNumbers": true,
-        "lineWrap": "off",
+        "lineWrap": "on",
+        "matchBrackets": true,
+        "readOnly": false,
+        "rulers": [],
         "showTrailingSpace": true,
+        "tabSize": 4,
         "wordWrapColumn": 100
-    }
+    },
 }
 EOF
 
@@ -229,7 +238,7 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/sett
     // Black Config
     // Config to be passed into black's format_str function call.
     "black": {
-        "line_length": 100
+        "line_length": 120
     },
 
     // Auto format config
@@ -243,7 +252,7 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/sett
         "include_trailing_comma": true,
         "force_grid_wrap": 0,
         "use_parentheses": true,
-        "line_length": 100
+        "line_length": 120
     }
 }
 EOF
@@ -366,6 +375,13 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/themes.jupyterlab-settings
         "code-font-size": "11px",
         "content-font-size1": "13px"
     }
+    // Selected Theme
+    // Application-level visual styling theme
+    "theme": "JupyterLab Dark",
+
+    // Scrollbar Theming
+    // Enable/disable styling of the application scrollbars
+    "theme-scrollbars": true
 }
 EOF
 
