@@ -16,16 +16,6 @@ BIN_DIR=$CONDA_ENV_DIR/bin
 # Completely remove these unused or outdated Python packages.
 $BIN_DIR/pip uninstall --yes jupyterlab-git
 
-# These will be outdated by Jlab-3.x which has built-in versions of them.
-declare -a EXTS_TO_DEL=(
-    jupyterlab-celltags
-    jupyterlab-toc
-    jupyterlab-git
-    nbdime-jupyterlab
-)2
-for i in "${EXTS_TO_DEL[@]}"; do
-    rm $CONDA_ENV_DIR/share/jupyter/lab/extensions/$i-*.tgz || true
-done
 
 # Do whatever it takes to prevent JLab pop-up "Build recommended..."
 $BIN_DIR/jupyter lab clean
@@ -210,9 +200,6 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/terminal-extension/plugin.jupyterlab-settings
 }
 EOF
 
-# Undo the old "mac-option-is-meta" mechanism designed for jlab<3.0.
-echo "# JLab-3 + macOptionIsMeta deprecates fix-osx-keymap.sh" > ~/.inputrc
-rm ~/.ipython/profile_default/startup/01-osx-jupyterlab-keys.py || true
 
 # Show command palette on lhs navbar, similar behavior to smnb.
 mkdir -p $JUPYTER_CONFIG_ROOT/apputils-extension/
@@ -486,5 +473,4 @@ try_append \
     "Register additional prefixes for conda environments" \
     server
 
-echo 'To enforce the change to jupyter config: sudo initctl restart jupyter-server --no-wait'
-echo 'then refresh your browser'
+sudo systemctl restart jupyter-server
