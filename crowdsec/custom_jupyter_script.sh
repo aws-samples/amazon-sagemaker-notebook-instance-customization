@@ -82,6 +82,7 @@ declare -a PKGS=(
     jupyterlab-execute-time
     jupyterlab-skip-traceback
     jupyterlab-unfold
+    jupytext
     stickyland
     ipython_genutils  # https://github.com/jupyter/nbdime/issues/621
 
@@ -93,6 +94,7 @@ declare -a PKGS=(
     "jupyterlab_code_formatter!=1.6.0"
     black
     isort
+    ruff
 )
 $BIN_DIR/pip install --no-cache-dir --upgrade pip  # Let us welcome colorful pip.
 $BIN_DIR/pip install --no-cache-dir --upgrade "${PKGS[@]}"
