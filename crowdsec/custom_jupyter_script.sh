@@ -492,3 +492,5 @@ try_append \
     server
 
 sudo systemctl restart jupyter-server
+
+echo "Restart successful"
