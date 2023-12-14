@@ -1,7 +1,7 @@
 #!/bin/bash
 
-
-set -euox pipefail
+set -euo pipefail
+set -x
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 if [[ $FLAVOR != "Amazon Linux 2" ]]; then
