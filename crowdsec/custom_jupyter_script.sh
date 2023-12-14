@@ -466,11 +466,11 @@ try_append() {
 
 touch ~/.jupyter/jupyter_server_config.py
 
-try_append \
-    c.NotebookApp.terminado_settings \
-    "{'shell_command': ['/bin/bash', '-l']}" \
-    "Changed shell to /bin/bash" \
-    notebook
+# try_append \
+#     c.NotebookApp.terminado_settings \
+#     "{'shell_command': ['/bin/bash', '-l']}" \
+#     "Changed shell to /bin/bash" \
+#     notebook
 
 # try_append \
 #     c.ServerApp.terminado_settings \
