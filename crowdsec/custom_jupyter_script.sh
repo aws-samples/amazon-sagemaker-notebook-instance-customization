@@ -374,7 +374,7 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/themes.jupyterlab-settings
     "overrides": {
         "code-font-size": "11px",
         "content-font-size1": "13px"
-    }
+    },
     // Selected Theme
     // Application-level visual styling theme
     "theme": "JupyterLab Dark",
