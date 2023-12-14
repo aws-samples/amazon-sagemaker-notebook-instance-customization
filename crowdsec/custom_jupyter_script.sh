@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
-set -x
+set -euox pipefail
 
 FLAVOR=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f 2)
 if [[ $FLAVOR != "Amazon Linux 2" ]]; then
@@ -473,23 +472,23 @@ try_append \
     "Changed shell to /bin/bash" \
     notebook
 
-try_append \
-    c.ServerApp.terminado_settings \
-    "{'shell_command': ['/bin/bash', '-l']}" \
-    "Changed shell to /bin/bash" \
-    server
+# try_append \
+#     c.ServerApp.terminado_settings \
+#     "{'shell_command': ['/bin/bash', '-l']}" \
+#     "Changed shell to /bin/bash" \
+#     server
 
-try_append \
-    c.EnvironmentKernelSpecManager.conda_env_dirs \
-    "['/home/ec2-user/anaconda3/envs', '/home/ec2-user/SageMaker/envs']" \
-    "Register additional prefixes for conda environments" \
-    notebook
+# try_append \
+#     c.EnvironmentKernelSpecManager.conda_env_dirs \
+#     "['/home/ec2-user/anaconda3/envs', '/home/ec2-user/SageMaker/envs']" \
+#     "Register additional prefixes for conda environments" \
+#     notebook
 
-try_append \
-    c.EnvironmentKernelSpecManager.conda_env_dirs \
-    "['/home/ec2-user/anaconda3/envs', '/home/ec2-user/SageMaker/envs']" \
-    "Register additional prefixes for conda environments" \
-    server
+# try_append \
+#     c.EnvironmentKernelSpecManager.conda_env_dirs \
+#     "['/home/ec2-user/anaconda3/envs', '/home/ec2-user/SageMaker/envs']" \
+#     "Register additional prefixes for conda environments" \
+#     server
 
 sudo systemctl restart jupyter-server
 
