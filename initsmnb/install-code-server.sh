@@ -3,13 +3,19 @@
 set -euo pipefail
 
 install_code_server() {
-    local LATEST_DOWNLOAD_URL=$(
-        curl --silent "https://api.github.com/repos/coder/code-server/releases/latest" |   # Get latest release from GitHub api
-            grep "\"browser_download_url\": \"https.*\/code-server-.*-amd64.rpm" |  # Get download url
-            sed -E 's/.*"([^"]+)".*/\1/'                                         # Pluck JSON value
-    )
+    #local LATEST_DOWNLOAD_URL=$(
+    #    curl --silent "https://api.github.com/repos/coder/code-server/releases/latest" |   # Get latest release from GitHub api
+    #        grep "\"browser_download_url\": \"https.*\/code-server-.*-amd64.rpm" |  # Get download url
+    #        sed -E 's/.*"([^"]+)".*/\1/'                                         # Pluck JSON value
+    #)
+    #
+    #local RPM=${LATEST_DOWNLOAD_URL##*/}
 
-    local RPM=${LATEST_DOWNLOAD_URL##*/}
+    # Pin to latest known version that can still work on alinux2 (glibc-2.26)
+    local VERSION=4.16.1
+    local LATEST_DOWNLOAD_URL="https://github.com/coder/code-server/releases/download/v${VERSION}/code-server-${VERSION}-amd64.rpm"
+    local RPM="code-server_${VERSION}_amd64.rpm"
+
     aria2c -x10 --dir /tmp -o ${RPM} ${LATEST_DOWNLOAD_URL}
     sudo yum localinstall -y /tmp/$RPM && rm /tmp/$RPM
     [[ -d ~/.cache/code-server/ ]] && rm -fr ~/.cache/code-server/

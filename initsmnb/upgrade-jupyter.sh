@@ -79,7 +79,6 @@ declare -a PKGS=(
     jupyterlab-execute-time
     jupyterlab-skip-traceback
     jupyterlab-unfold
-    stickyland
 
     # jupyterlab_code_formatter requires formatters in its venv.
     # See: https://github.com/ryantam626/jupyterlab_code_formatter/issues/153
@@ -99,7 +98,6 @@ declare -a PKGS=(
     jupyterlab-execute-time
     jupyterlab-skip-traceback
     jupyterlab-unfold
-    stickyland
     ipython_genutils  # https://github.com/jupyter/nbdime/issues/621
 
     # jupyterlab_code_formatter requires formatters in its venv.
