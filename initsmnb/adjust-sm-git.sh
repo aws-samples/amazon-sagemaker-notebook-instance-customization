@@ -44,3 +44,10 @@ git config --global alias.lolac "! clear; git lol --all -\$(expr \`tput lines\` 
 echo Setup steps for HTTPS connections to AWS CodeCommit repositories
 git config --global credential.helper '!aws codecommit credential-helper $@'
 git config --global credential.UseHttpPath true
+
+if command -v delta &> /dev/null ; then
+    echo "adjust-git.sh: delta is available..."
+    git config --global core.pager "delta -s"
+    git config --global interactive.diffFilter "delta -s --color-only"
+    git config --global delta.navigate "true"
+fi

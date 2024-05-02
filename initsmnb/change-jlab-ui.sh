@@ -16,7 +16,11 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/themes.jupyterlab-settings
     "overrides": {
         "code-font-size": "11px",
         "content-font-size1": "13px"
-    }
+    },
+
+    // Scrollbar Theming
+    // Enable/disable styling of the application scrollbars
+    "theme-scrollbars": false
 }
 EOF
 
@@ -38,14 +42,22 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/terminal-extension/plugin.jupyterlab-settings
 }
 EOF
 
-mkdir -p $JUPYTER_CONFIG_ROOT/fileeditor-extension/
-cat << EOF > $JUPYTER_CONFIG_ROOT/fileeditor-extension/plugin.jupyterlab-settings
+mkdir -p $JUPYTER_CONFIG_ROOT/codemirror-extension/
+cat << EOF > $JUPYTER_CONFIG_ROOT/codemirror-extension/plugin.jupyterlab-settings
 {
-    "editorConfig": {
-        "rulers": [80, 100],
+    // CodeMirror
+    // @jupyterlab/codemirror-extension:plugin
+    // Text editor settings for all CodeMirror editors.
+    // ************************************************
+
+    "defaultConfig": {
         "codeFolding": true,
-        "lineNumbers": true,
-        "lineWrap": "off"
+        "highlightActiveLine": true,
+        "highlightTrailingWhitespace": true,
+        "rulers": [
+            80,
+            100
+        ]
     }
 }
 EOF
@@ -53,22 +65,30 @@ EOF
 mkdir -p $JUPYTER_CONFIG_ROOT/notebook-extension/
 cat << EOF > $JUPYTER_CONFIG_ROOT/notebook-extension/tracker.jupyterlab-settings
 {
+    // Notebook
+    // @jupyterlab/notebook-extension:tracker
+    // Notebook settings.
+    // **************************************
+
+    // Code Cell Configuration
+    // The configuration for all code cells; it will override the CodeMirror default configuration.
     "codeCellConfig": {
-        "rulers": [80, 100],
-        "codeFolding": true,
         "lineNumbers": true,
-        "lineWrap": "off"
+        "lineWrap": true
     },
+
+    // Markdown Cell Configuration
+    // The configuration for all markdown cells; it will override the CodeMirror default configuration.
     "markdownCellConfig": {
-        "rulers": [80, 100],
-        "codeFolding": true,
         "lineNumbers": true,
-        "lineWrap": "off"
+        "lineWrap": true
     },
+
+    // Raw Cell Configuration
+    // The configuration for all raw cells; it will override the CodeMirror default configuration.
     "rawCellConfig": {
-        "rulers": [80, 100],
         "lineNumbers": true,
-        "lineWrap": "off"
+        "lineWrap": true
     }
 }
 EOF

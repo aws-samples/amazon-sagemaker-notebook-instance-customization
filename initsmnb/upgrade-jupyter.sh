@@ -141,28 +141,26 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/notebook-extension/tracker.jupyterlab-settings
     // @jupyterlab/notebook-extension:tracker
     // Notebook settings.
     // **************************************
+
+    // Code Cell Configuration
+    // The configuration for all code cells; it will override the CodeMirror default configuration.
     "codeCellConfig": {
-        "rulers": [80, 100],
-        "codeFolding": true,
         "lineNumbers": true,
-        "lineWrap": "off",
-        "showTrailingSpace": true,
-        "wordWrapColumn": 100
+        "lineWrap": true
     },
+
+    // Markdown Cell Configuration
+    // The configuration for all markdown cells; it will override the CodeMirror default configuration.
     "markdownCellConfig": {
-        "rulers": [80, 100],
-        "codeFolding": true,
         "lineNumbers": true,
-        "lineWrap": "off",
-        "showTrailingSpace": true,
-        "wordWrapColumn": 100
+        "lineWrap": true
     },
+
+    // Raw Cell Configuration
+    // The configuration for all raw cells; it will override the CodeMirror default configuration.
     "rawCellConfig": {
-        "rulers": [80, 100],
         "lineNumbers": true,
-        "lineWrap": "off",
-        "showTrailingSpace": true,
-        "wordWrapColumn": 100
+        "lineWrap": true
     },
 
     // Since: jlab-2.0.0
@@ -171,20 +169,22 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/notebook-extension/tracker.jupyterlab-settings
 }
 EOF
 
-mkdir -p $JUPYTER_CONFIG_ROOT/fileeditor-extension/
-cat << EOF > $JUPYTER_CONFIG_ROOT/fileeditor-extension/plugin.jupyterlab-settings
+mkdir -p $JUPYTER_CONFIG_ROOT/codemirror-extension/
+cat << EOF > $JUPYTER_CONFIG_ROOT/codemirror-extension/plugin.jupyterlab-settings
 {
-    // Text Editor
-    // @jupyterlab/fileeditor-extension:plugin
-    // Text editor settings.
-    // ***************************************
-    "editorConfig": {
-        "rulers": [80, 100],
+    // CodeMirror
+    // @jupyterlab/codemirror-extension:plugin
+    // Text editor settings for all CodeMirror editors.
+    // ************************************************
+
+    "defaultConfig": {
         "codeFolding": true,
-        "lineNumbers": true,
-        "lineWrap": "off",
-        "showTrailingSpace": true,
-        "wordWrapColumn": 100
+        "highlightActiveLine": true,
+        "highlightTrailingWhitespace": true,
+        "rulers": [
+            80,
+            100
+        ]
     }
 }
 EOF
@@ -228,39 +228,34 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/apputils-extension/palette.jupyterlab-settings
     // Command palette settings.
     // **************************************
 
-    // Modal Command Palette
-    // Whether the command palette should be modal or in the left panel.
-    "modal": false
+    "modal": false      // Command palette on the left panel.
 }
 EOF
 
 # Linter for notebook editors and code editors. Do not autosave on notebook, because it's broken
 # on multi-line '!some_command \'. Note that autosave doesn't work on text editor anyway.
-mkdir -p $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/
-cat << EOF > $JUPYTER_CONFIG_ROOT/../\@ryantam626/jupyterlab_code_formatter/settings.jupyterlab-settings
+mkdir -p $JUPYTER_CONFIG_ROOT/../jupyterlab_code_formatter/
+cat << EOF > $JUPYTER_CONFIG_ROOT/../jupyterlab_code_formatter/settings.jupyterlab-settings
 {
     // Jupyterlab Code Formatter
-    // @ryantam626/jupyterlab_code_formatter:settings
+    // jupyterlab_code_formatter:settings
     // Jupyterlab Code Formatter settings.
-    // **********************************************
+    // ***********************************
 
-    // Black Config
-    // Config to be passed into black's format_str function call.
-    "black": {
-        "line_length": 100
-    },
-
-    // Auto format config
-    // Auto format code when save the notebook.
     "formatOnSave": false,
+
+    "black": {
+        "line_length": 100,
+        "string_normalization": true
+    },
 
     // Isort Config
     // Config to be passed into isort's SortImports function call.
     "isort": {
-        "multi_line_output": 3,
-        "include_trailing_comma": true,
-        "force_grid_wrap": 0,
-        "use_parentheses": true,
+        //"multi_line_output": 3,
+        //"include_trailing_comma": true,
+        //"force_grid_wrap": 0,
+        //"use_parentheses": true,
         "line_length": 100
     }
 }
@@ -271,13 +266,15 @@ EOF
 #   (numbers start from 1).
 # - Do not auto-number headings in output cells.
 mkdir -p $JUPYTER_CONFIG_ROOT/toc-extension
-cat << EOF > $JUPYTER_CONFIG_ROOT/toc-extension/plugin.jupyterlab-settings
+cat << EOF > $JUPYTER_CONFIG_ROOT/toc-extension/registry.jupyterlab-settings
 {
     // Table of Contents
     // @jupyterlab/toc-extension:plugin
     // Table of contents settings.
     // ********************************
+
     "includeOutput": false,
+    "numberHeaders": true,
     "numberingH1": false
 }
 EOF
@@ -334,14 +331,12 @@ cat << EOF > $JUPYTER_CONFIG_ROOT/settingeditor-extension/form-ui.jupyterlab-set
     // Settings editor form ui settings.
     // *******************************************
 
-    // Type of editor for the setting.
-    // Set the type of editor to use while editing your settings.
     "settingEditorType": "json"
 }
 EOF
 
 # Disable notification -- Jlab started to get extremely noisy since v3.6.0+
-mkdir -p $JUPYTER_CONFIG_ROOT/settingeditor-extension
+mkdir -p $JUPYTER_CONFIG_ROOT/apputils-extension
 cat << 'EOF' > $JUPYTER_CONFIG_ROOT/apputils-extension/notification.jupyterlab-settings
 {
     // Notifications
@@ -349,17 +344,20 @@ cat << 'EOF' > $JUPYTER_CONFIG_ROOT/apputils-extension/notification.jupyterlab-s
     // Notifications settings.
     // *******************************************
 
-    // Check for JupyterLab updates
-    // Whether to check for newer version of JupyterLab or not. It requires `fetchNews` to be `true`
-    // to be active. If `true`, it will make a request to a website.
     "checkForUpdates": false,
-
-    // Silence all notifications
-    // If `true`, no toast notifications will be automatically displayed.
-    "doNotDisturbMode": true,
-
-    // Fetch official Jupyter news
-    // Whether to fetch news from Jupyter news feed. If `true`, it will make a request to a website.
+    "doNotDisturbMode": true,   // Silence all notifications.
     "fetchNews": "false"
+}
+EOF
+
+mkdir -p $JUPYTER_CONFIG_ROOT/completer-extension
+cat << 'EOF' > $JUPYTER_CONFIG_ROOT/completer-extension/manager.jupyterlab-settings
+{
+    // Code Completion
+    // @jupyterlab/completer-extension:manager
+    // Code Completion settings.
+    // ***************************************
+
+    "autoCompletion": true
 }
 EOF

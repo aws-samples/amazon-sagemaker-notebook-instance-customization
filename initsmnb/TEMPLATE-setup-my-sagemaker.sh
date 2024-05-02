@@ -95,7 +95,6 @@ run_and_track_stat ${BIN_DIR}/upgrade-jupyter.sh     &> ~/INITSMNB-upgrade-jupyt
 run_and_track_stat ${BIN_DIR}/install-cdk.sh         &> ~/INITSMNB-install-cdk.txt &
 run_and_track_stat ${BIN_DIR}/install-code-server.sh &> ~/INITSMNB-install-code-server.txt &
 
-${BIN_DIR}/adjust-sm-git.sh 'Firstname Lastname' first.last@email.abc
 ${BIN_DIR}/fix-osx-keymap.sh
 ${BIN_DIR}/patch-bash-config.sh
 ${BIN_DIR}/fix-ipython.sh
@@ -145,6 +144,9 @@ rm -fr ~/.cache/{pip,yarn}/
 # Any failed jobs?
 echo -e "\nJobs status:"
 egrep -e '^INITSMNB SUCCESS|^INITSMNB ERROR' ~/INITSMNB*txt
+
+# Move it here to ensure delta's presence.
+${BIN_DIR}/adjust-sm-git.sh 'Firstname Lastname' first.last@email.abc
 
 
 ################################################################################

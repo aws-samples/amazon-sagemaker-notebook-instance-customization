@@ -94,7 +94,7 @@ GIT_USER=''
 GIT_EMAIL=''
 CONFIG_DOCKER=1
 PLAIN_OLD_JLAB=0
-INSTALL_CDK=1
+INSTALL_CDK=0
 
 declare -a EFS=()
 
@@ -103,7 +103,7 @@ declare -a HELP=(
     "[-l|--from-local]"
     "[--git-user 'First Last']"
     "[--git-email me@abc.def]"
-    "[--no-cdk]"
+    "[--with-cdk]"
     "[--efs 'fsid,fsap,mp' [--efs ...]]"
     "[--no-config-docker]"
     "[--plain-old-jlab]"
@@ -151,8 +151,8 @@ parse_args() {
             PLAIN_OLD_JLAB=1
             shift
             ;;
-        --no-cdk)
-            INSTALL_CDK=0
+        --with-cdk)
+            INSTALL_CDK=1
             shift
             ;;
         *)
